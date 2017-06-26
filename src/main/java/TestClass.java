@@ -1,4 +1,5 @@
 import classes.Stream;
+import interfaces.BiFunction;
 import interfaces.Function;
 import interfaces.Predicate;
 
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public class TestClass {
     public static void main(String[] rgs) {
-        List<Integer> l = Arrays.asList(1,2,3,4,5,6,7,8,9);
+        List<Integer> l = Arrays.asList(1);
         Collection<Integer> objects = Stream.of(l).filter(new Predicate<Integer>() {
             @Override
             public Boolean test(Integer object) {
@@ -24,6 +25,13 @@ public class TestClass {
                 return start.toString();
             }
         }).toList();
+
+        Integer reduce = Stream.of(l).reduce(new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer elem1, Integer elem2) {
+                return elem1 + elem2;
+            }
+        });
         System.out.println();
     }
 }
