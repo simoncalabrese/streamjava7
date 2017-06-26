@@ -23,11 +23,23 @@ public class Optional<T> {
         return elem;
     }
 
+    public <U> Optional<U> map(Function<T, U> function) {
+        return of(function.apply(elem));
+    }
+
     public T orElse(T defaultElem) {
         if(isPresent()) {
             return get();
         } else {
             return defaultElem;
+        }
+    }
+
+    public <U> Object orElseMap(Function<T, U> function) {
+        if(isPresent()) {
+            return elem;
+        } else {
+            return function.apply(elem);
         }
     }
 }
