@@ -4,38 +4,43 @@ import interfaces.BiFunction;
 import interfaces.Function;
 import interfaces.Optional;
 import interfaces.Predicate;
+import pipeline.Pipeline;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.Set;
 
 
 /**
  * Created by simon.calabrese on 26/06/2017.
  */
 public class Stream<T> {
-    private List<T> coll;
+    private Pipeline<T> pipeline;
 
-    private Stream(final List<T> coll) {
-        this.coll = coll;
+    private Stream(final Collection<T> coll) {
+        this.pipeline = new Pipeline<>(coll);
     }
 
-    public static<T> Stream<T> of(List<T> collection) {
+    private Stream(final Pipeline<T> pipeline) {
+        this.pipeline = pipeline;
+    }
+
+    public static<T> Stream<T> of(Collection<T> collection) {
         return new Stream<>(collection);
     }
 
     public <A> Stream<A> map(final Function<T,A> function) {
-        List<A> tmp = new ArrayList<>(coll.size());
-        for(T elem:coll) {
+        Pipeline<A> tmp = pipeline.emptyPipeline();
+        for(T elem:pipeline.getCollection()) {
             tmp.add(function.apply(elem));
         }
         return new Stream<>(tmp);
     }
 
     public Stream<T> filter(final Predicate<T> predicate) {
-        List<T> tmp = new ArrayList<>(coll);
-        for(T elem:coll) {
+        final Pipeline<T> tmp = pipeline.clone();
+        for(T elem:pipeline.getCollection()) {
             if(!predicate.test(elem)) {
                 tmp.remove(elem);
             }
@@ -45,14 +50,14 @@ public class Stream<T> {
 
     public T reduce() {
         T accumulator = null;
-        for(T elem:coll) {
+        for(T elem:pipeline.getCollection()) {
             accumulator = elem;
         }
         return accumulator;
     }
 
     public T reduce(BiFunction<T,T,T> biFunction) {
-        Iterator<T> iterator = coll.iterator();
+        Iterator<T> iterator = pipeline.iterator();
         T acc = iterator.next();
         while(iterator.hasNext()) {
             acc = biFunction.apply(acc,iterator.next());
@@ -61,13 +66,18 @@ public class Stream<T> {
     }
 
     public <U> Optional<U> reduce(U identity, BiFunction<U,T,U> aggregator) {
-        for(T elem:coll) {
+        for (Iterator<T> it = pipeline.iterator(); it.hasNext(); ) {
+            final T elem = it.next();
             identity = aggregator.apply(identity,elem);
         }
         return Optional.of(identity);
     }
 
     public List<T> toList() {
-        return coll;
+        return pipeline.toList();
+    }
+
+    public Set<T> toSet() {
+        return pipeline.toSet();
     }
 }

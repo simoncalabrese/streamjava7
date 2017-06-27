@@ -1,7 +1,13 @@
-package classes;
+package interfaces;
+
+import pipeline.Pipeline;
+
+import java.util.Collection;
 
 /**
  * Created by simon.calabrese on 27/06/2017.
  */
-public class Collectors {
+public interface Collectors<U, C extends Collection<U>> {
+
+    C collect();
 }

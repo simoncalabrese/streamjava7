@@ -3,28 +3,26 @@ import interfaces.BiFunction;
 import interfaces.Function;
 import interfaces.Predicate;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by simon.calabrese on 26/06/2017.
  */
 public class TestClass {
     public static void main(String[] rgs) {
-        List<Integer> l = Arrays.asList(1);
-        Collection<Integer> objects = Stream.of(l).filter(new Predicate<Integer>() {
+        List<Integer> l = new ArrayList<>(Arrays.asList(1,2));
+        List<Integer> objects = Stream.of(l).filter(new Predicate<Integer>() {
             @Override
             public Boolean test(Integer object) {
                 return object % 2 == 0;
             }
         }).toList();
-        Collection<String> strings = Stream.of(l).map(new Function<Integer, String>() {
+        Set<Integer> strings = Stream.of(l).map(new Function<Integer, Integer>() {
             @Override
-            public String apply(Integer start) {
-                return start.toString();
+            public Integer apply(Integer start) {
+                return 4;
             }
-        }).toList();
+        }).toSet();
 
         Integer reduce = Stream.of(l).reduce(new BiFunction<Integer, Integer, Integer>() {
             @Override
