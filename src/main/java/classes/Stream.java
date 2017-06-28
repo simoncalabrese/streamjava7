@@ -6,6 +6,8 @@ import interfaces.Optional;
 import interfaces.Predicate;
 import pipeline.Pipeline;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -26,9 +28,14 @@ public class Stream<T> {
         this.pipeline = pipeline;
     }
 
+    private Stream(final T ... array) {
+        this.pipeline = new Pipeline<>(new ArrayList<>(Arrays.asList(array)));
+    }
+
     public static<T> Stream<T> of(Collection<T> collection) {
         return new Stream<>(collection);
     }
+    public static<T> Stream<T> of(T ... array) {return new Stream<>(array);}
 
     public <A> Stream<A> map(final Function<T,A> function) {
         Pipeline<A> tmp = pipeline.emptyPipeline();
