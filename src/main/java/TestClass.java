@@ -1,4 +1,3 @@
-import classes.Stream;
 import interfaces.BiFunction;
 import interfaces.Function;
 import interfaces.Predicate;
