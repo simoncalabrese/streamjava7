@@ -2,7 +2,10 @@ import interfaces.BiFunction;
 import interfaces.Function;
 import interfaces.Predicate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by simon.calabrese on 26/06/2017.
