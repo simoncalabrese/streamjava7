@@ -7,11 +7,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import interfaces.Function;
+import interfaces.parallel.ParallelFunction;
 import org.apache.commons.collections4.ListUtils;
 
-import mapOrReduce.interfaces.Function;
-import mapOrReduce.interfaces.Predicate;
-import mapOrReduce.interfaces.parallel.ParallelFunction;
 
 public class ParallelStream<T> extends Stream<T> {
 
@@ -65,30 +64,5 @@ public class ParallelStream<T> extends Stream<T> {
 		}
 		
 	}
-	
-	public static void main(String[] rgs) {
-		final List<Integer> inte = Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
-		long start = System.currentTimeMillis();
-		List<Integer> inteDoubSeq = Stream.of(inte).map(new Function<Integer, Integer>() {
-			@Override
-			public Integer apply(Integer start) {
-				return start*2;
-			}
-		}).toList();
-		System.out.println(inteDoubSeq);
-		long end = System.currentTimeMillis();
-		System.out.println(end - start);
-		start = System.currentTimeMillis();
-		List<Integer> inteDoubPar = ParallelStream.of(inte).map(new Function<Integer, Integer>() {
-			@Override
-			public Integer apply(Integer start) {
-				return start*2;
-			}
-		}).toList();
-		System.out.println(inteDoubPar);
-		end = System.currentTimeMillis();
-		System.out.println(end - start);
-	}
-	
 
 }

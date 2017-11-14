@@ -1,37 +1,59 @@
-import interfaces.BiFunction;
-import interfaces.Function;
-import interfaces.Predicate;
+import classes.CollectorImpl;
+import classes.Collectors;
+import classes.Stream;
+import classes.StreamNew;
+import interfaces.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by simon.calabrese on 26/06/2017.
  */
 public class TestClass {
     public static void main(String[] rgs) {
-        List<Integer> l = new ArrayList<>(Arrays.asList(1,2));
-        List<Integer> objects = Stream.of(l).filter(new Predicate<Integer>() {
+        /*List<Integer> list = new ArrayList<>(Arrays.asList(1, 1, 5, 5, 3, 3, 7));
+
+        Map<String, Integer> mm = StreamNew.of(list).collect(Collectors.toMap(new Function<Integer, String>() {
             @Override
-            public Boolean test(Integer object) {
-                return object % 2 == 0;
+            public String apply(Integer start) {
+                return start.toString();
             }
-        }).toList();
-        Set<Integer> strings = Stream.of(l).map(new Function<Integer, Integer>() {
+        }, new Function<Integer, Integer>() {
             @Override
             public Integer apply(Integer start) {
-                return 4;
+                return start;
             }
-        }).toSet();
-
-        Integer reduce = Stream.of(l).reduce(new BiFunction<Integer, Integer, Integer>() {
+        }, new BinaryOperator<Integer>() {
             @Override
             public Integer apply(Integer elem1, Integer elem2) {
                 return elem1 + elem2;
             }
-        });
+        }));
+       final List<String> collect = StreamNew.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))).collect(Collectors.mapping(new Function<Integer, String>() {
+            @Override
+            public String apply(Integer start) {
+                return start.toString();
+            }
+        }));*/
+        /*final Integer collect1 = StreamNew.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))).collect(Collectors.reducing(0, new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer elem1, Integer elem2) {
+                return elem1 + elem2;
+            }
+        }));*/
+
+        final HashMap<String, Integer> collect = StreamNew.of(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))).collect(Collectors.groupingBy(new Function<Integer, String>() {
+            @Override
+            public String apply(Integer start) {
+                return start.toString();
+            }
+        }, Collectors.reducing(0, new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer elem1, Integer elem2) {
+                return elem1 + elem2;
+            }
+        }), new HashMap<String, Integer>()));
+
         System.out.println();
     }
 }
