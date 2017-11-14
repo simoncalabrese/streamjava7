@@ -1,10 +1,6 @@
 package classes;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by simon.calabrese on 13/11/2017.
@@ -30,6 +26,9 @@ class Pipeline<T> {
     @SuppressWarnings("unchecked")
     <C extends Collection> C getNewInstance() {
         try {
+            if(AbstractSet.class.isAssignableFrom(collectionType)) {
+                return (C) this.toSet();
+            }
             return (C) collectionType.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
             return null;

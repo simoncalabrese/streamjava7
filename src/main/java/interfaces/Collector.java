@@ -1,10 +1,10 @@
 package interfaces;
 
-import classes.StreamNew;
+import classes.Stream;
 
 /**
  * Created by simon.calabrese on 14/11/2017.
  */
 public interface Collector<U, T, M> {
-    M collect(final StreamNew<T> stream);
+    M collect(final Stream<T> stream);
 }

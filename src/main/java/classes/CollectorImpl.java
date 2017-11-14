@@ -17,8 +17,10 @@ public class CollectorImpl<U, T, M> implements Collector<U ,T, M> {
         this.afterAll = afterAll;
     }
 
+
+
     @Override
-    public M collect(final StreamNew<T> streamNew) {
-        return afterAll.apply(streamNew.reduce(supplier.get(), aggregator));
+    public M collect(final Stream<T> stream) {
+        return afterAll.apply(stream.reduce(supplier.get(), aggregator));
     }
 }

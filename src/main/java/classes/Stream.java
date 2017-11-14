@@ -1,231 +1,129 @@
 package classes;
 
 import interfaces.*;
+import interfaces.Optional;
+import interfaces.innerFunction.ToIntegerFunction;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 /**
- * Created by simon.calabrese on 26/06/2017.
+ * Created by simon.calabrese on 13/11/2017.
  */
 public class Stream<T> {
 
-    private List<T> coll;
+    private Pipeline<T> pipeline;
 
-    Stream(final List<T> coll) {
-        this.coll = coll;
+    private Pipeline<T> getPipeline() {
+        return pipeline;
     }
 
-    public static <T> Stream<T> of(Collection<T> collection) {
-        return new Stream<>(new ArrayList<>(collection));
+    protected Stream() {
+
     }
 
-    public static <T> Stream<T> of(List<T> collection) {
-        return new Stream<>(Optional.of(collection).orElse(new ArrayList<T>()));
+    protected Stream(final Collection<T> coll) {
+        this.pipeline = new Pipeline<>(coll, coll.getClass());
+    }
+
+    public static <T> Stream<T> of(final Collection<T> collection) {
+        return new Stream<>(collection);
     }
 
     public static <T> Stream<T> of(T... array) {
-        List<T> vettList = new ArrayList<>(Arrays.asList(array));
-        return new Stream<>(vettList);
-    }
-
-    public static <T> Stream<T> concat(Stream<T> streamA, Stream<T> streamB) {
-        final List<T> coll = new ArrayList<>(streamA.coll);
-        coll.addAll(streamB.coll);
-        return new Stream<>(coll);
+        return new Stream<>(new ArrayList<T>(Arrays.asList(array)));
     }
 
     public static <T> Stream<T> empty() {
         return new Stream<>(new ArrayList<T>());
     }
 
-    public <A> Stream<A> map(final Function<T, A> function) {
-        List<A> tmp = new ArrayList<>(coll.size());
-        for (T elem : coll) {
-            tmp.add(function.apply(elem));
-        }
-        return new Stream<>(tmp);
+    public static <T> Stream<T> concat(final Stream<T> streamA, final Stream<T> streamB) {
+        final Collection<T> newColl = streamA.getPipeline().getColl();
+        newColl.addAll(streamB.getPipeline().getColl());
+        return new Stream<T>(newColl);
     }
 
-    public Stream<T> filter(final Predicate<T> predicate) {
-        final BiFunction<ArrayList<T>, T, ArrayList<T>> reducer = new BiFunction<ArrayList<T>, T, ArrayList<T>>() {
-            public ArrayList<T> apply(ArrayList<T> elem1, T elem2) {
-                if (predicate.test(elem2))
-                    elem1.add(elem2);
-                return elem1;
+    public <U> Stream<U> map(final Function<T, U> mapper) {
+        final Collection<U> newInstance = getPipeline().getNewInstance();
+        for (T elem : getPipeline().getColl()) {
+            newInstance.add(mapper.apply(elem));
+        }
+        return new Stream<>(newInstance);
+    }
+
+    public IntStream mapToInt(final ToIntegerFunction<T> func) {
+        return new IntStream(map(func));
+    }
+
+    public Optional<T> reduce() {
+        final BinaryOperator<T> identityOpearator = new BinaryOperator<T>() {
+            public T apply(T elem1, T elem2) {
+                return elem2;
             }
         };
-        return Stream.of(reduce(new ArrayList<T>(), reducer).orElse(null));
+        return reduce(identityOpearator);
     }
 
-    public T reduce() {
-        T accumulator = null;
-        if (coll != null) {
-            for (T elem : coll) {
-                accumulator = elem;
-            }
-        }
-        return accumulator;
-    }
-
-    public T reduce(BiFunction<T, T, T> biFunction) {
-        final Iterator<T> iterator = coll.iterator();
-        T acc = iterator.next();
-        while (iterator.hasNext()) {
-            acc = biFunction.apply(acc, iterator.next());
-        }
-        return acc;
-    }
-
-    public <U> Optional<U> reduce(U identity, BiFunction<U, T, U> aggregator) {
-        for (T elem : coll) {
-            identity = aggregator.apply(identity, elem);
-        }
-        return Optional.of(identity);
-    }
-
-    public Optional<T> findFirst() {
-        if (coll != null && coll.size() > 0) {
-            return Optional.of(coll.get(0));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    public List<T> toList() {
-        return coll;
-    }
-
-    public <K> String joining(final Function<T, K> mapper, final String delimiter) {
-        return map(mapper).reduce(null, new BiFunction<String, K, String>() {
-            @Override
-            public String apply(String elem1, K elem2) {
-                if (elem1 != null && elem2 == null) {
-                    return elem1;
-                } else if (elem1 == null && elem2 != null) {
-                    return elem2.toString();
-                } else {
-                    return elem1.concat(delimiter).concat(elem2.toString());
+    public Optional<T> reduce(final BinaryOperator<T> operator) {
+        final Optional<T> op = Optional.empty();
+        for (final T elem : getPipeline().getColl()) {
+            op.map(new UnaryOperator<T>() {
+                public T apply(T start) {
+                    return operator.apply(op.get(), elem);
                 }
-            }
-        }).orElse(null);
+            });
+        }
+        return op;
     }
 
-    public String joining() {
-        return joining(new Function<T, T>() {
-            public T apply(T start) {
-                return start;
-            }
-        }, "");
-    }
-
-    public String joining(final String delimiter) {
-        return joining(new Function<T, T>() {
-            public T apply(T start) {
-                return start;
-            }
-        }, delimiter);
-    }
-
-    public <K> Map<K, List<T>> groupBy(final Function<T, K> key) {
-        final Map<K, List<T>> groupped = new HashMap<>();
-        for (final T elem : coll) {
-            final List<T> subListed = Stream.of(coll).filter(new Predicate<T>() {
-                public Boolean test(T e) {
-                    return key.apply(elem).equals(key.apply(e));
+    public <U> U reduce(final U identity, final BiFunction<U, T, U> biMapper) {
+        Optional<U> op = Optional.of(identity);
+        for (final T elem : getPipeline().getColl()) {
+            op = op.map(new Function<U, U>() {
+                @Override
+                public U apply(U start) {
+                    return biMapper.apply(start, elem);
                 }
-            }).toList();
-            groupped.put(key.apply(elem), subListed);
+            });
         }
-        return groupped;
+        return op.get();
     }
 
-    public <K, U> Map<K, List<U>> groupBy(final Function<T, K> key, final Function<T, U> valueMapper) {
-        final Map<K, List<U>> map = new HashMap<>();
-        for (final T elem : coll) {
-            final List<U> subList = Stream.of(coll).filter(new Predicate<T>() {
-                public Boolean test(T object) {
-                    return key.apply(elem).equals(key.apply(object));
-                }
-            }).map(valueMapper).toList();
-            map.put(key.apply(elem), subList);
+    public Stream<T> filter(final Predicate<T> pattern) {
+        final Collection<T> newInstance = getPipeline().getNewInstance();
+        for (final T elem : getPipeline().getColl()) {
+            if (pattern.test(elem)) {
+                newInstance.add(elem);
+            }
         }
-        return map;
-    }
-
-    public <K, U> Map<K, U> groupBy(final Function<T, K> key, U identity, BiFunction<U, T, U> collector) {
-        final Map<K, List<T>> groupped = groupBy(key);
-        final Map<K, U> toreturn = new HashMap<K, U>();
-        for (Map.Entry<K, List<T>> row : groupped.entrySet()) {
-            toreturn.put(row.getKey(), Stream.of(row.getValue()).reduce(identity, collector).orElse(null));
-        }
-        return toreturn;
-    }
-
-    public <K, U> Map<K, U> toMap(final Function<T, K> keyMapper, final Function<T, U> valueMapper) {
-        final Map<K, U> hashMap = new HashMap<>();
-        for (T elem : coll) {
-            hashMap.put(keyMapper.apply(elem), valueMapper.apply(elem));
-        }
-        return hashMap;
-    }
-
-    public <K, U> Map<K, U> toMap(final Function<T, K> keyMapper, final Function<T, U> valueMapper,
-                                  final BiFunction<K, K, K> mergeConflict) {
-        final Map<K, U> hashMap = new HashMap<>();
-        for (T elem : coll) {
-            final K key = keyMapper.apply(elem);
-            hashMap.put(!hashMap.containsKey(key) ? key : mergeConflict.apply(key, (K) hashMap.get(key)),
-                    valueMapper.apply(elem));
-        }
-        return hashMap;
+        return new Stream<>(newInstance);
     }
 
     public <U> Stream<U> flatMap(Function<T, Stream<U>> mapper) {
-        return this.map(mapper).reduce(new BiFunction<Stream<U>, Stream<U>, Stream<U>>() {
+        return this.map(mapper).reduce(new BinaryOperator<Stream<U>>() {
             @Override
             public Stream<U> apply(Stream<U> elem1, Stream<U> elem2) {
                 return concat(elem1, elem2);
             }
-        });
+        }).orElse(Stream.<U>empty());
+    }
+
+    public Stream<T> peek(final UnaryOperator<T> consumer) {
+        return Stream.of(getPipeline().getColl()).map(consumer);
     }
 
     public void forEach(final Consumer<T> consumer) {
-        for (final Iterator<T> iter = this.coll.iterator(); iter.hasNext(); ) {
-            consumer.consume(iter.next());
+        for (T t : getPipeline().getColl()) {
+            consumer.consume(t);
         }
     }
 
-    public Double summingDouble(Function<T, Double> mapper) {
-        return this.coll != null && this.coll.size() > 0
-                ? this.map(mapper).reduce(new BiFunction<Double, Double, Double>() {
-            @Override
-            public Double apply(final Double elem1, final Double elem2) {
-                return Optional.of(elem1)
-                        .map(new Function<Double, Double>() {
-                            public Double apply(final Double one) {
-                                return Optional.of(elem2).map(new Function<Double, Double>() {
-                                    @Override
-                                    public Double apply(Double two) {
-                                        return one + two;
-                                    }
-                                }).orElse(one);
-                            }
-                        }).orElse(0D);
-            }
-        }) : 0D;
+    public Optional<T> findFirst() {
+        return Optional.of(collect(Collectors.toList(new ArrayList<T>())).get(0));
     }
 
     public Long count() {
-        return (long) coll.size();
+        return (long) pipeline.getColl().size();
     }
 
     public Boolean anyMatch(final Predicate<T> pattern) {
@@ -233,11 +131,15 @@ public class Stream<T> {
     }
 
     public Boolean allMatch(final Predicate<T> pattern) {
-        return Long.compare(Stream.of(coll).count(), Stream.of(coll).filter(pattern).count()) == 0;
+        return Long.compare(Stream.of(pipeline.getColl()).count(), Stream.of(pipeline.getColl()).filter(pattern).count()) == 0;
+    }
+
+    public <U, M> M collect(final Collector<U, T, M> collector) {
+        return collector.collect(this);
     }
 
     public Stream<T> sorted(Comparator<T> comparator) {
-        Collections.sort(coll, comparator);
+        Collections.sort(collect(Collectors.toList(new ArrayList<T>())), comparator);
         return this;
     }
 }

@@ -1,6 +1,8 @@
 package classes;
 
 import interfaces.*;
+import interfaces.innerFunction.ToDoubleFunction;
+import interfaces.innerFunction.ToIntegerFunction;
 
 import java.util.*;
 
@@ -55,31 +57,31 @@ public class Collectors {
     }
 
 
-    public static <U extends String, T> Collector<U, T, U> joining() {
+    public static <T> Collector<String, T, String> joining() {
         return joining(",");
     }
 
-    public static <U extends String, T> Collector<U, T, U> joining(final String delimiter) {
-        return joining(delimiter, new Function<T, T>() {
+    public static <T> Collector<String, T, String> joining(final String delimiter) {
+        return joining(delimiter, new Function<T, String>() {
             @Override
-            public T apply(T start) {
-                return start;
+            public String apply(T start) {
+                return start.toString();
             }
         });
     }
 
-    public static <U extends String, T, R> Collector<U, T, U> joining(final String delimiter,
-                                                                      final Function<T, R> mapper) {
+    public static <T, R> Collector<String, T, String> joining(final String delimiter,
+                                                              final Function<T, String> mapper) {
 
-        return reducing((U) "", new BiFunction<U, T, U>() {
+        return reducing("", new BiFunction<String, T, String>() {
             @Override
-            public U apply(U elem1, T elem2) {
+            public String apply(String elem1, T elem2) {
                 if (elem1 != null && elem2 == null) {
                     return elem1;
                 } else if (elem1 == null && elem2 != null) {
-                    return (U) mapper.apply(elem2).toString();
+                    return mapper.apply(elem2);
                 } else {
-                    return (U) elem1.concat(delimiter).concat(mapper.apply(elem2).toString());
+                    return elem1.concat(delimiter).concat(mapper.apply(elem2));
                 }
             }
         });
@@ -119,14 +121,14 @@ public class Collectors {
         });
     }
 
-    /*public static <U extends Map<R, List<T>>, T, R, M extends U> Collector<U, T, M> groupingBy(final Function<T, R> keyMapper) {
-        return groupingBy(keyMapper, toList(new ArrayList<T>()), new HashMap<R, List<T>>());
-    }*/
+    public static <U extends Map<R, List<T>>, T, R> Collector<U, T, U> groupingBy(final Function<T, R> keyMapper) {
+        return groupingBy(keyMapper, toList(new ArrayList<T>()), (U) new HashMap<R, List<T>>());
+    }
 
 
-    public static <U extends Map<R, List<T>>, R, T, M extends Map<R, KK>, KK> Collector<U, T, M> groupingBy(final Function<T, R> keyMapper,
-                                                                                                            final Collector<KK, T, KK> downStream,
-                                                                                                            final M identity) {
+    public static <U extends Map<R, List<T>>, R, T, M extends Map<? super R, ? super KK>, KK> Collector<U, T, M> groupingBy(final Function<T, R> keyMapper,
+                                                                                                                            final Collector<KK, T, KK> downStream,
+                                                                                                                            final M identity) {
         return new CollectorImpl<>(new Supplier<U>() {
             @Override
             public U get() {
@@ -142,7 +144,7 @@ public class Collectors {
                     elem1.remove(apply);
                     elem1.put(apply, values);
                 } else {
-                    final List<T> values = StreamNew.of(elem2).collect(toList(new ArrayList<T>()));
+                    final List<T> values = Stream.of(elem2).collect(toList(new ArrayList<T>()));
                     elem1.put(keyMapper.apply(elem2), values);
                 }
                 return elem1;
@@ -150,10 +152,10 @@ public class Collectors {
         }, new Function<U, M>() {
             @Override
             public M apply(U start) {
-                return (M) StreamNew.of(start.entrySet()).map(new Function<Map.Entry<R, List<T>>, Map.Entry<R, KK>>() {
+                return (M) Stream.of(start.entrySet()).map(new Function<Map.Entry<R, List<T>>, Map.Entry<R, KK>>() {
                     @Override
                     public Map.Entry<R, KK> apply(Map.Entry<R, List<T>> start) {
-                        return new AbstractMap.SimpleEntry<>(start.getKey(), StreamNew.of(start.getValue()).collect(downStream));
+                        return new AbstractMap.SimpleEntry<>(start.getKey(), Stream.of(start.getValue()).collect(downStream));
                     }
                 }).collect(toMap(new Function<Map.Entry<R, KK>, R>() {
                     @Override
@@ -170,6 +172,43 @@ public class Collectors {
         });
     }
 
+    public static <U extends Double, T> Collector<U, T, U> summingDouble(final ToDoubleFunction<T> function) {
+        return new CollectorImpl<>(new Supplier<U>() {
+            @Override
+            public U get() {
+                return (U) new Double(0D);
+            }
+        }, new BiFunction<U, T, U>() {
+            @Override
+            public U apply(U elem1, T elem2) {
+                return (U) new Double(new Double(elem1) + function.apply(elem2));
+            }
+        }, new UnaryOperator<U>() {
+            @Override
+            public U apply(U start) {
+                return start;
+            }
+        });
+    }
+
+    public static <U extends Integer, T> Collector<U, T, U> summingInt(final ToIntegerFunction<T> function) {
+        return new CollectorImpl<>(new Supplier<U>() {
+            @Override
+            public U get() {
+                return (U) new Integer(0);
+            }
+        }, new BiFunction<U, T, U>() {
+            @Override
+            public U apply(U elem1, T elem2) {
+                return (U) new Integer(new Integer(elem1) + function.apply(elem2));
+            }
+        }, new UnaryOperator<U>() {
+            @Override
+            public U apply(U start) {
+                return start;
+            }
+        });
+    }
 
 
 }
