@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79a03ff3-a3c2-4cbb-8a6b-ad5d8b620e64" name="Default" comment="new method">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo/streamjava7/streamjava7/1.0-SNAPSHOT/maven-metadata-local.xml" afterPath="$PROJECT_DIR$/repo/streamjava7/streamjava7/1.0-SNAPSHOT/maven-metadata-local.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo/streamjava7/streamjava7/1.0-SNAPSHOT/maven-metadata-local.xml.md5" afterPath="$PROJECT_DIR$/repo/streamjava7/streamjava7/1.0-SNAPSHOT/maven-metadata-local.xml.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo/streamjava7/streamjava7/1.0-SNAPSHOT/maven-metadata-local.xml.sha1" afterPath="$PROJECT_DIR$/repo/streamjava7/streamjava7/1.0-SNAPSHOT/maven-metadata-local.xml.sha1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo/streamjava7/streamjava7/maven-metadata-local.xml" afterPath="$PROJECT_DIR$/repo/streamjava7/streamjava7/maven-metadata-local.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo/streamjava7/streamjava7/maven-metadata-local.xml.md5" afterPath="$PROJECT_DIR$/repo/streamjava7/streamjava7/maven-metadata-local.xml.md5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/repo/streamjava7/streamjava7/maven-metadata-local.xml.sha1" afterPath="$PROJECT_DIR$/repo/streamjava7/streamjava7/maven-metadata-local.xml.sha1" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,7 +28,7 @@
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="324">
-              <caret line="29" column="59" lean-forward="true" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
+              <caret line="29" column="42" lean-forward="true" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -946,7 +951,7 @@
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
-          <caret line="29" column="59" lean-forward="true" selection-start-line="29" selection-start-column="59" selection-end-line="29" selection-end-column="59" />
+          <caret line="29" column="42" lean-forward="true" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
           <folding />
         </state>
       </provider>

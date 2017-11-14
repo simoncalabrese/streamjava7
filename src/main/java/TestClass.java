@@ -1,5 +1,5 @@
-import classes.Collectors;
-import classes.Stream;
+import com.utils.streamjava7.classes.Collectors;
+import com.utils.streamjava7.classes.Stream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
