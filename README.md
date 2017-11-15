@@ -5,12 +5,12 @@ How to include library in your project:
 
 in pom add:
 
-<repositories>
-        <repository>
-            <id>simoncalabrese</id>
-                <name>streamjava7</name>
-                <url>https://github.com/simoncalabrese/streamjava7/raw/master</url>
-        </repository>
+'<repositories>'
+        '<repository>'
+            '<id>simoncalabrese</id>'
+                '<name>streamjava7</name>'
+                '<url>https://github.com/simoncalabrese/streamjava7/raw/master</url>'
+        '</repository>'
  </repositories>
  
  and under <dependecies>
