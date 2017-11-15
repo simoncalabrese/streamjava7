@@ -7,9 +7,9 @@ in pom add:
 
 <repositories>
         <repository>
-            "<id>simoncalabrese</id>\n"
-            "<name>streamjava7</name>\n"
-            <url>https://github.com/simoncalabrese/streamjava7/raw/master</url>
+            <id>simoncalabrese</id>
+                <name>streamjava7</name>
+                <url>https://github.com/simoncalabrese/streamjava7/raw/master</url>
         </repository>
  </repositories>
  
