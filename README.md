@@ -9,7 +9,9 @@ in pom add:
 &nbsp;&nbsp;&nbsp;`<repository>`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<id>`simoncalabrese`</id>`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<name>`streamjava7`</name>`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;`<url>`https://github.com/simoncalabrese/streamjava7/raw/master`</url>`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`<url>`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://github.com/simoncalabrese/streamjava7/raw/master <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`</url>`<br/>
 &nbsp;&nbsp;&nbsp;`</repository`<br/>
  `</repositories>`<br/>
  <br/>
