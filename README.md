@@ -5,7 +5,7 @@ How to include library in your project:
 
 in pom add:
 
-`<repositories>`
+`<repositories>`<br/>
         `<repository>`
             `<id>`simoncalabrese`</id>`
                 `<name>`streamjava7`</name>`
@@ -15,8 +15,8 @@ in pom add:
  
  and under <dependecies>
  
-  <dependency>
-       <groupId>com.streamjava7</groupId>
-       <artifactId>streamApi</artifactId>
-       <version>0.0.2</version>
-  </dependency>
+  `<dependency>`
+`<groupId>`com.streamjava7`</groupId>`
+       `<artifactId>`streamApi`</artifactId>`
+       `<version>`0.0.2`</version>`
+  `</dependency>`
