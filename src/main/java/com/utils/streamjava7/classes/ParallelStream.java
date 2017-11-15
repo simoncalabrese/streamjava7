@@ -44,6 +44,13 @@ public class ParallelStream<T> extends Stream<T> {
         return map.collect(Collectors.toList(new ArrayList<Stream<T>>()));
     }
 
+    /**
+     *
+     * @param inList list chuncked to execute in parallel
+     * @param function mapper function
+     * @param <A> type of result stream
+     * @return Stream mapped
+     */
     private <A> Stream<A> executeMap(final List<Stream<T>> inList, final Function<T, A> function) {
         final List<ParallelFunction<T, A>> list = Stream.of(inList).map(new Function<Stream<T>, ParallelFunction<T, A>>() {
             @Override

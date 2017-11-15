@@ -43,5 +43,5 @@
             </plugin>
         </plugins>
     </build>
-
+<!--mvn install:install-file -DgroupId=com.streamjava7 -DartifactId=streamApi -Dversion=0.0.1 -Dpackaging=jar -Dfile=target/streamApi-0.0.1.jar -DlocalRepositoryPath=.-->
 </project>

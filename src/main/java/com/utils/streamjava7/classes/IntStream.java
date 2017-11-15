@@ -14,6 +14,12 @@ public class IntStream extends Stream<Integer> {
         super(stream.collect(Collectors.toList(new ArrayList<Integer>())));
     }
 
+    /**
+     * Create an IntStream that goes from start inclusive value to end esclusive value
+     * @param startInclusive start value
+     * @param endEsclusive end value
+     * @return Stream of integers
+     */
     public static Stream<Integer> range(final Integer startInclusive, final Integer endEsclusive) {
         if (startInclusive.compareTo(endEsclusive) > 0) {
             return empty();
@@ -22,6 +28,12 @@ public class IntStream extends Stream<Integer> {
         }
     }
 
+    /**
+     * Create an IntStream that goes from start inclusive value to end inclusive value
+     * @param startInclusive start value
+     * @param endInclusive end value
+     * @return Stream of Integers
+     */
     public static Stream<Integer> rangeClosed(final Integer startInclusive, final Integer endInclusive) {
         if (startInclusive.compareTo(endInclusive) > 0) {
             return empty();
