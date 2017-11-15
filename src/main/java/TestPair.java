@@ -10,6 +10,10 @@ public class TestPair {
         this.age = age;
     }
 
+    public TestPair(Integer age) {
+        this.age = age;
+    }
+
     public String getName() {
         return name;
     }

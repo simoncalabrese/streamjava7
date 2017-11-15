@@ -8,26 +8,20 @@ import java.util.*;
 /**
  * Created by simon.calabrese on 13/11/2017.
  */
-public class Stream<T> {
-
-    private Pipeline<T> pipeline;
-
-    private Pipeline<T> getPipeline() {
-        return pipeline;
-    }
+public class Stream<T> extends BaseStream<T> {
 
     protected Stream() {
-
     }
 
     protected Stream(final Collection<T> coll) {
-        this.pipeline = new Pipeline<>(coll, coll.getClass());
+        super.pipeline = new Pipeline<>(coll, coll.getClass());
     }
 
     /**
      * Create a stream starting by a collection
+     *
      * @param collection param to insert in pipeline
-     * @param <T> type of collection
+     * @param <T>        type of collection
      * @return Stream of <T>
      */
     public static <T> Stream<T> of(final Collection<T> collection) {
@@ -36,8 +30,9 @@ public class Stream<T> {
 
     /**
      * Create a stream starting by array
+     *
      * @param array to transform in stream insert into pipeline
-     * @param <T> type of collection
+     * @param <T>   type of collection
      * @return Stream of <T>
      */
     public static <T> Stream<T> of(T... array) {
@@ -46,6 +41,7 @@ public class Stream<T> {
 
     /**
      * Create empty stream of T
+     *
      * @param <T>
      * @return
      */
@@ -55,6 +51,7 @@ public class Stream<T> {
 
     /**
      * Concat collections boot two streams and returns one
+     *
      * @param streamA
      * @param streamB
      * @param <T>
@@ -66,8 +63,13 @@ public class Stream<T> {
         return new Stream<T>(newColl);
     }
 
+    private Pipeline<T> getPipeline() {
+        return pipeline;
+    }
+
     /**
      * execute mapper from Stream<T> to Stream<U>
+     *
      * @param mapper function of mapping
      * @param <U>
      * @return
@@ -81,7 +83,6 @@ public class Stream<T> {
     }
 
     /**
-     *
      * @param func IntFunction for map stream to IntStream
      * @return @IntStream
      */
@@ -91,6 +92,7 @@ public class Stream<T> {
 
     /**
      * perform reducing that returns the last element of a collection
+     *
      * @return
      */
     public Optional<T> reduce() {
@@ -104,6 +106,7 @@ public class Stream<T> {
 
     /**
      * Perform a reduce with BinaryOperator and return result of all elements logic
+     *
      * @param operator reducer mapper
      * @return Optional of element in collection
      */
@@ -120,7 +123,6 @@ public class Stream<T> {
     }
 
     /**
-     *
      * @param identity accumulator to return
      * @param biMapper combiner for reducing collection in accumulator
      * @param <U>
@@ -141,6 +143,7 @@ public class Stream<T> {
 
     /**
      * Return filtered collection by pattern as e Predicate
+     *
      * @param pattern
      * @return
      */
@@ -155,7 +158,6 @@ public class Stream<T> {
     }
 
     /**
-     *
      * @param mapper function that converts T to stream of U and flat all streams in only
      *               one Stream
      * @param <U>
@@ -171,7 +173,6 @@ public class Stream<T> {
     }
 
     /**
-     *
      * @param consumer UnaryOperator that decorate each element in Stream
      * @return
      */
@@ -186,7 +187,6 @@ public class Stream<T> {
     }
 
     /**
-     *
      * @return the first element of stream as an optional or empty if Stream is empty
      */
     public Optional<T> findFirst() {
@@ -194,7 +194,6 @@ public class Stream<T> {
     }
 
     /**
-     *
      * @return the elements in list
      */
     public Long count() {
@@ -203,6 +202,7 @@ public class Stream<T> {
 
     /**
      * Return by a pattern true if one element match with pattern otherwise false
+     *
      * @param pattern Predicate of T
      * @return
      */
@@ -212,6 +212,7 @@ public class Stream<T> {
 
     /**
      * Return true if all elements in stream match with pattern otherwise false
+     *
      * @param pattern
      * @return
      */
@@ -220,11 +221,12 @@ public class Stream<T> {
     }
 
     /**
-     *  Collect strem in Collection collected by selected collector
-     *  See Collectors class for take legacy collectors
+     * Collect strem in Collection collected by selected collector
+     * See Collectors class for take legacy collectors
+     *
      * @param collector
-     * @param <U> Map<key, list of T>
-     * @param <M> Final Map collected by downstream
+     * @param <U>       Map<key, list of T>
+     * @param <M>       Final Map collected by downstream
      * @return Map
      */
     public <U, M> M collect(final Collector<U, T, M> collector) {
@@ -233,11 +235,41 @@ public class Stream<T> {
 
     /**
      * Return a sorted Stream by Comparator
+     *
      * @param comparator sorter criteria
      * @return
      */
     public Stream<T> sorted(Comparator<T> comparator) {
         Collections.sort(collect(Collectors.toList(new ArrayList<T>())), comparator);
         return this;
+    }
+
+    public Stream<T> distinct() {
+        final Function<T, T> identity = new Function<T, T>() {
+            @Override
+            public T apply(T start) {
+                return start;
+            }
+        };
+        return new Stream<>(collect(Collectors.toMap(identity, identity, new BinaryOperator<T>() {
+            @Override
+            public T apply(T elem1, T elem2) {
+                return elem1;
+            }
+        })).keySet());
+    }
+
+    public <U> Stream<T> distinct(final Function<T, U> mapToAttribute) {
+        return new Stream<>(collect(Collectors.toMap(mapToAttribute, new Function<T, T>() {
+            @Override
+            public T apply(T start) {
+                return start;
+            }
+        }, new BinaryOperator<T>() {
+            @Override
+            public T apply(T elem1, T elem2) {
+                return elem1;
+            }
+        })).values());
     }
 }

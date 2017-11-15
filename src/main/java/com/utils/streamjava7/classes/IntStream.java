@@ -1,9 +1,14 @@
 package com.utils.streamjava7.classes;
 
+import com.utils.streamjava7.interfaces.BiFunction;
+import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class IntStream extends Stream<Integer> {
 
     private IntStream(final Collection<Integer> intStream) {
@@ -16,8 +21,9 @@ public class IntStream extends Stream<Integer> {
 
     /**
      * Create an IntStream that goes from start inclusive value to end esclusive value
+     *
      * @param startInclusive start value
-     * @param endEsclusive end value
+     * @param endEsclusive   end value
      * @return Stream of integers
      */
     public static Stream<Integer> range(final Integer startInclusive, final Integer endEsclusive) {
@@ -30,8 +36,9 @@ public class IntStream extends Stream<Integer> {
 
     /**
      * Create an IntStream that goes from start inclusive value to end inclusive value
+     *
      * @param startInclusive start value
-     * @param endInclusive end value
+     * @param endInclusive   end value
      * @return Stream of Integers
      */
     public static Stream<Integer> rangeClosed(final Integer startInclusive, final Integer endInclusive) {
@@ -50,5 +57,14 @@ public class IntStream extends Stream<Integer> {
             integerList.add(i);
         }
         return of(integerList);
+    }
+
+    public Double average() {
+        return new BigDecimal(reduce(0, new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer elem1, Integer elem2) {
+                return elem1 + elem2;
+            }
+        }) / count().doubleValue()).doubleValue();
     }
 }

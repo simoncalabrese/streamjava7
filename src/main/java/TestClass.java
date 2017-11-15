@@ -1,9 +1,9 @@
 import com.utils.streamjava7.classes.Collectors;
 import com.utils.streamjava7.classes.Stream;
+import com.utils.streamjava7.interfaces.Function;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -12,13 +12,13 @@ import java.util.List;
 public class TestClass {
     public static void main(String[] rgs) {
         List<Integer> list = new ArrayList<>(Arrays.asList(1, 1, 5, 5, 3, 3, 7));
-        final Stream<Integer> sorted = Stream.of(list).sorted(new Comparator<Integer>() {
+        List<TestPair> ts = new ArrayList<>(Arrays.asList(new TestPair(1), new TestPair(1), new TestPair(5), new TestPair(5), new TestPair(3), new TestPair(3), new TestPair(7)));
+        final ArrayList<TestPair> collect = Stream.of(ts).distinct(new Function<TestPair, Integer>() {
             @Override
-            public int compare(Integer o1, Integer o2) {
-                return o2.compareTo(o1);
+            public Integer apply(TestPair start) {
+                return start.getAge();
             }
-        });
-        sorted.collect(Collectors.<Integer>joining(","));
+        }).collect(Collectors.toList(new ArrayList<TestPair>()));
 
         System.out.println();
     }
