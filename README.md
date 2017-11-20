@@ -20,5 +20,5 @@ in pom add:
  `<dependency>`<br/>
 &nbsp;&nbsp;&nbsp;`<groupId>`com.streamjava7`</groupId>`<br/>
 &nbsp;&nbsp;&nbsp;`<artifactId>`streamApi`</artifactId>`<br/>
-&nbsp;&nbsp;&nbsp;`<version>`0.0.2`</version>`<br/>
+&nbsp;&nbsp;&nbsp;`<version>`1.0.0`</version>`<br/>
   `</dependency>`<br/>
