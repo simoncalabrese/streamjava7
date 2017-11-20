@@ -26,4 +26,6 @@ public abstract class BaseStream<T> {
     public abstract <U, M> M collect(final Collector<U, T, M> collector);
     public abstract Stream<T> sorted(Comparator<T> comparator);
     public abstract <U> Stream<T> distinct(final Function<T, U> mapToAttribute);
+
+    public abstract ParallelStream<T> parallel();
 }

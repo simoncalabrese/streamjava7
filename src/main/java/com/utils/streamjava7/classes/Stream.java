@@ -272,4 +272,9 @@ public class Stream<T> extends BaseStream<T> {
             }
         })).values());
     }
+
+    @Override
+    public ParallelStream<T> parallel() {
+        return ParallelStream.of(pipeline.getColl());
+    }
 }
