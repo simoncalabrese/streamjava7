@@ -7,6 +7,7 @@ import com.utils.streamjava7.interfaces.parallel.ParallelFunction;
 import org.apache.commons.collections4.ListUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -17,12 +18,12 @@ public class ParallelStream<T> extends Stream<T> {
     private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(chunkSize);
     private List<Stream<T>> chunked;
 
-    private ParallelStream(List<T> coll) {
+    private ParallelStream(Collection<T> coll) {
         super(coll);
         this.chunked = chunkList();
     }
 
-    public static <T> ParallelStream<T> of(List<T> coll) {
+    public static <T> ParallelStream<T> of(Collection<T> coll) {
         return new ParallelStream<>(coll);
     }
 
