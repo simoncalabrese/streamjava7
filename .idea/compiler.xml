@@ -9,7 +9,7 @@
         <module name="streamjava7" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="streamjava7" target="1.7" />
     </bytecodeTargetLevel>
   </component>
