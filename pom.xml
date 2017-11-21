@@ -6,7 +6,7 @@
 
     <groupId>com.streamjava7</groupId>
     <artifactId>streamApi</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -56,5 +56,5 @@
             </plugin>
         </plugins>
     </build>
-    <!--mvn install:install-file -DgroupId=com.streamjava7 -DartifactId=streamApi -Dversion=0.0.1 -Dpackaging=jar -Dfile=target/streamApi-0.0.1.jar -DlocalRepositoryPath=.-->
+    <!--mvn install:install-file -DgroupId=com.streamjava7 -DartifactId=streamApi -Dversion=1.0.3 -Dpackaging=jar -Dfile=target/streamApi-1.0.3.jar -DlocalRepositoryPath=.-->
 </project>
