@@ -1,7 +1,6 @@
 package com.utils.streamjava7.classes;
 
 import com.utils.streamjava7.interfaces.BiFunction;
-import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

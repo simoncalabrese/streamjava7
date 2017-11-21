@@ -36,11 +36,11 @@ class Pipeline<T> {
     }
 
     List<T> toList() {
-        return new ArrayList<T>(this.coll);
+        return new ArrayList<>(this.coll);
     }
 
     Set<T> toSet() {
-        return new HashSet<T>(this.coll);
+        return new HashSet<>(this.coll);
     }
 
 
