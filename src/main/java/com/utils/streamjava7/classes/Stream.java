@@ -275,9 +275,10 @@ public class Stream<T> extends BaseStream<T> {
 
     public Stream<Stream<T>> split(final Integer chunkSize) {
         List<List<T>> partitions = new ArrayList<>();
-        for (int i = 0; i < pipeline.getColl().size(); i += chunkSize) {
+        final int chunkList = pipeline.getColl().size() % chunkSize;
+        for (int i = 0; i < pipeline.getColl().size(); i += chunkList) {
             partitions.add(new ArrayList<>(collect(Collectors.toList(new ArrayList<T>())).subList(i,
-                    Math.min(i + chunkSize, pipeline.getColl().size()))));
+                    Math.min(i + chunkList, pipeline.getColl().size()))));
         }
         return Stream.of(partitions).map(new Function<List<T>, Stream<T>>() {
             @Override
