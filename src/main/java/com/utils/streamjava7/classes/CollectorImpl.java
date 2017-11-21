@@ -1,6 +1,9 @@
 package com.utils.streamjava7.classes;
 
-import com.utils.streamjava7.interfaces.*;
+import com.utils.streamjava7.interfaces.BiFunction;
+import com.utils.streamjava7.interfaces.Collector;
+import com.utils.streamjava7.interfaces.Function;
+import com.utils.streamjava7.interfaces.Supplier;
 
 /**
  * Created by simon.calabrese on 14/11/2017.

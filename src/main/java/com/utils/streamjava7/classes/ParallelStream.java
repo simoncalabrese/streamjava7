@@ -1,6 +1,5 @@
 package com.utils.streamjava7.classes;
 
-import com.utils.streamjava7.interfaces.Collector;
 import com.utils.streamjava7.interfaces.Function;
 
 import java.util.ArrayList;

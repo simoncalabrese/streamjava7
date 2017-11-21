@@ -5,7 +5,10 @@ import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToIntegerFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by simon.calabrese on 14/11/2017.
