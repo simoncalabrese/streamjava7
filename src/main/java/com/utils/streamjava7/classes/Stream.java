@@ -14,7 +14,7 @@ public class Stream<T> extends BaseStream<T> {
     }
 
     protected Stream(final Collection<T> coll) {
-        super.pipeline = new Pipeline<>(Optional.of(coll).orElse(new ArrayList<T>()), coll.getClass());
+        super.pipeline = new Pipeline<>(Optional.of(coll).orElse(new ArrayList<T>()));
     }
 
     /**

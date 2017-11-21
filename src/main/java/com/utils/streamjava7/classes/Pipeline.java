@@ -10,9 +10,9 @@ class Pipeline<T> {
     private Class<? extends Collection> collectionType;
 
     @SuppressWarnings("unchecked")
-    Pipeline(final Collection<T> coll, final Class<? extends Collection> collectionType) {
+    Pipeline(final Collection<T> coll) {
         this.coll = coll;
-        this.collectionType = collectionType;
+        this.collectionType = coll.getClass();
     }
 
     Collection<T> getColl() {
