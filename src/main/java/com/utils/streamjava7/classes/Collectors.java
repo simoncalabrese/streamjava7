@@ -20,7 +20,7 @@ public class Collectors {
      * @return
      */
     public static <U extends List<T>, T> Collector<U, T, U> toList(final U identity) {
-        return reducing((U) new ArrayList<T>(), new BiFunction<U, T, U>() {
+        return reducing(identity, new BiFunction<U, T, U>() {
             @Override
             public U apply(U elem1, T elem2) {
                 elem1.add(elem2);

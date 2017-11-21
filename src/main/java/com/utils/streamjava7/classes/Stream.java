@@ -273,6 +273,20 @@ public class Stream<T> extends BaseStream<T> {
         })).values());
     }
 
+    public Stream<Stream<T>> split(final Integer chunkSize) {
+        List<List<T>> partitions = new ArrayList<>();
+        for (int i = 0; i < pipeline.getColl().size(); i += chunkSize) {
+            partitions.add(new ArrayList<>(collect(Collectors.toList(new ArrayList<T>())).subList(i,
+                    Math.min(i + chunkSize, pipeline.getColl().size()))));
+        }
+        return Stream.of(partitions).map(new Function<List<T>, Stream<T>>() {
+            @Override
+            public Stream<T> apply(List<T> start) {
+                return Stream.of(start);
+            }
+        });
+    }
+
     @Override
     public ParallelStream<T> parallel() {
         return ParallelStream.of(pipeline.getColl());
