@@ -33,6 +33,10 @@ public class TestClass {
             }
         }), new HashMap<String, String>()));
         System.out.println();
+
+        String s = null;
+        final String collect1 = Stream.of(s).collect(Collectors.<String>joining());
+        System.out.println();
     }
 
 

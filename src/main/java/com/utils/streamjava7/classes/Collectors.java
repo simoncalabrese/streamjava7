@@ -4,6 +4,7 @@ import com.utils.streamjava7.interfaces.*;
 import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToIntegerFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -135,11 +136,13 @@ public class Collectors {
             @Override
             public String apply(String elem1, T elem2) {
                 if (elem1 != null && elem2 == null) {
-                    return elem1;
+                    return !StringUtils.isBlank(elem1) ? elem1 : null;
                 } else if (elem1 == null && elem2 != null) {
                     return mapper.apply(elem2);
                 } else {
-                    return elem1.concat(delimiter).concat(mapper.apply(elem2));
+                    return !StringUtils.isBlank(elem1)
+                            ? elem1.concat(delimiter).concat(mapper.apply(elem2))
+                            : mapper.apply(elem2);
                 }
             }
         });
