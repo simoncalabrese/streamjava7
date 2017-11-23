@@ -1,3 +1,5 @@
 target/*
 .idea
 streamjava7.iml
+src/main/java/TestClass.java
+src/main/java/TestPair.java
