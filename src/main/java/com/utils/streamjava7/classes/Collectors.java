@@ -6,10 +6,7 @@ import com.utils.streamjava7.interfaces.innerFunction.ToIntegerFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by simon.calabrese on 14/11/2017.
@@ -23,6 +20,21 @@ public class Collectors {
      * @return
      */
     public static <U extends List<T>, T> Collector<U, T, U> toList(final U identity) {
+        return toCollection(identity);
+        /*return reducing(identity, new BiFunction<U, T, U>() {
+            @Override
+            public U apply(U elem1, T elem2) {
+                elem1.add(elem2);
+                return elem1;
+            }
+        });*/
+    }
+
+    public static <U extends Set<T>, T> Collector<U, T, U> toSet(final U identity) {
+        return toCollection(identity);
+    }
+
+    public static <U extends Collection<T>, T> Collector<U, T, U> toCollection(final U identity) {
         return reducing(identity, new BiFunction<U, T, U>() {
             @Override
             public U apply(U elem1, T elem2) {
