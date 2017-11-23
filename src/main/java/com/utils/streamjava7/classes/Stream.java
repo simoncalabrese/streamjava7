@@ -127,15 +127,7 @@ public class Stream<T> extends BaseStream<T> {
             });
         }
         return op;
-        /*Optional<T> op = Optional.empty();
-        for (final T elem : getPipeline().getColl()) {
-            op = op.map(new BinaryOperator<T>() {
-                public T apply(T T start) {
-                    return operator.apply(op.get(), elem);
-                }
-            });
-        }
-        return op;*/
+
     }
 
     /**
@@ -202,6 +194,19 @@ public class Stream<T> extends BaseStream<T> {
         }
     }
 
+    public void forEachOrdered(final Consumer<T> consumer,final Comparator<T> comparator) {
+        sorted(comparator).forEach(consumer);
+    }
+
+    public void forEachOrdered(final Consumer<T> consumer) {
+        sorted(new Comparator<T>() {
+            @Override
+            public int compare(T o1, T o2) {
+                return Integer.compare(o1.hashCode(), o2.hashCode());
+            }
+        }).forEach(consumer);
+    }
+
     /**
      * @return the first element of stream as an optional or empty if Stream is empty
      */
@@ -256,8 +261,9 @@ public class Stream<T> extends BaseStream<T> {
      * @return
      */
     public Stream<T> sorted(Comparator<T> comparator) {
-        Collections.sort(collect(Collectors.toList(new ArrayList<T>())), comparator);
-        return this;
+        final List<T> sorted = this.getPipeline().toList();
+        Collections.sort(sorted, comparator);
+        return new Stream<>(sorted);
     }
 
     public Stream<T> distinct() {
