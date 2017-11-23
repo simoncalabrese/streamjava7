@@ -2,6 +2,7 @@ package com.utils.streamjava7.classes;
 
 import com.utils.streamjava7.interfaces.*;
 import com.utils.streamjava7.interfaces.innerFunction.ToIntegerFunction;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
 
@@ -111,15 +112,30 @@ public class Stream<T> extends BaseStream<T> {
      * @return Optional of element in collection
      */
     public Optional<T> reduce(final BinaryOperator<T> operator) {
-        final Optional<T> op = Optional.empty();
-        for (final T elem : getPipeline().getColl()) {
-            op.map(new UnaryOperator<T>() {
+        if (CollectionUtils.isEmpty(this.getPipeline().getColl())) {
+            return Optional.empty();
+        }
+        final List<T> ts = getPipeline().toList();
+        Optional<T> op = Optional.of(ts.get(0));
+        ts.remove(0);
+        for (final T elem : ts) {
+            op = op.map(new Function<T, T>() {
+                @Override
                 public T apply(T start) {
-                    return operator.apply(op.get(), elem);
+                    return operator.apply(start, elem);
                 }
             });
         }
         return op;
+        /*Optional<T> op = Optional.empty();
+        for (final T elem : getPipeline().getColl()) {
+            op = op.map(new BinaryOperator<T>() {
+                public T apply(T T start) {
+                    return operator.apply(op.get(), elem);
+                }
+            });
+        }
+        return op;*/
     }
 
     /**
@@ -271,6 +287,15 @@ public class Stream<T> extends BaseStream<T> {
                 return elem1;
             }
         })).values());
+    }
+
+    public Stream<T> skip(final int numToSkip) {
+        final List<T> ts = getPipeline().toList();
+        final ArrayList<T> newColl = new ArrayList<>();
+        for (int i = numToSkip; i < getPipeline().getColl().size(); i++) {
+            newColl.add(ts.get(i));
+        }
+        return Stream.of(newColl);
     }
 
     public Stream<Stream<T>> split(final Integer chunkSize) {

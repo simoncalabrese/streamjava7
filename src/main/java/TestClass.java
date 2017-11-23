@@ -1,5 +1,6 @@
 import com.utils.streamjava7.classes.Collectors;
 import com.utils.streamjava7.classes.Stream;
+import com.utils.streamjava7.interfaces.BinaryOperator;
 import com.utils.streamjava7.interfaces.Function;
 import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
 
@@ -36,6 +37,15 @@ public class TestClass {
 
         String s = null;
         final String collect1 = Stream.of(s).collect(Collectors.<String>joining());
+        System.out.println();
+
+ts.clear();
+        final TestPair testPair = Stream.of(ts).reduce(new BinaryOperator<TestPair>() {
+            @Override
+            public TestPair apply(TestPair elem1, TestPair elem2) {
+                return elem2;
+            }
+        }).orElse(null);
         System.out.println();
     }
 
