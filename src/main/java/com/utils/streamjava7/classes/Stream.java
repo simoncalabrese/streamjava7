@@ -1,6 +1,7 @@
 package com.utils.streamjava7.classes;
 
 import com.utils.streamjava7.interfaces.*;
+import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToIntegerFunction;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -90,6 +91,8 @@ public class Stream<T> extends BaseStream<T> {
     public IntStream mapToInt(final ToIntegerFunction<T> func) {
         return new IntStream(map(func));
     }
+
+    public DoubleStream mapToDouble(final ToDoubleFunction<T> func) {return new DoubleStream(map(func));}
 
     /**
      * perform reducing that returns the last element of a collection

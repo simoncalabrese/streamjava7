@@ -1,6 +1,8 @@
 import com.utils.streamjava7.classes.Collectors;
+import com.utils.streamjava7.classes.ParallelStream;
 import com.utils.streamjava7.classes.Stream;
 import com.utils.streamjava7.interfaces.*;
+import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
 
 import java.util.*;
@@ -18,7 +20,16 @@ public class TestClass {
                 new TestPair("c", 5),
                 new TestPair("c", 6),
                 new TestPair("c", 7)))).collect(Collectors.toCollection(new ArrayList<TestPair>()));
-        Stream.of(ts).forEachOrdered(new Consumer<TestPair>() {
+
+        final Double sum = Stream.of(ts).mapToDouble(new ToDoubleFunction<TestPair>() {
+            @Override
+            public Double apply(TestPair start) {
+                return new Double(start.getAge());
+            }
+        }).sum();
+
+        System.out.println(sum);
+        /*Stream.of(ts).forEachOrdered(new Consumer<TestPair>() {
             @Override
             public void consume(TestPair elem) {
                 System.out.println(elem.getName());
@@ -28,7 +39,7 @@ public class TestClass {
             public int compare(TestPair o1, TestPair o2) {
                 return o1.getName().compareTo(o2.getName());
             }
-        });
+        });*/
     }
 
 

@@ -5,6 +5,7 @@ import com.utils.streamjava7.interfaces.BiFunction;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
@@ -65,5 +66,33 @@ public class IntStream extends Stream<Integer> {
                 return elem1 + elem2;
             }
         }) / count().doubleValue()).doubleValue();
+    }
+
+
+    public Integer sum() {
+        return reduce(0, new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer elem1, Integer elem2) {
+                return elem1 + Optional.of(elem2).orElse(0);
+            }
+        });
+    }
+
+    public Integer max() {
+        return sorted(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        }).findFirst().orElse(null);
+    }
+
+    public Integer min() {
+        return sorted(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        }).findFirst().orElse(null);
     }
 }
