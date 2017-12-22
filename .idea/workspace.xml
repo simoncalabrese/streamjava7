@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="79a03ff3-a3c2-4cbb-8a6b-ad5d8b620e64" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/PatternMatcherImp.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/matcher/PatternMatcher.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/TestClass.java" afterPath="$PROJECT_DIR$/src/main/java/TestClass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/DoubleStream.java" afterPath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/DoubleStream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/IntStream.java" afterPath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/IntStream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java" afterPath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/streamjava7.iml" afterPath="$PROJECT_DIR$/streamjava7.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Optional.java" afterPath="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Optional.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,109 +24,60 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Stream.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="94" column="104" lean-forward="false" selection-start-line="94" selection-start-column="104" selection-end-line="94" selection-end-column="104" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#846#847#0" expanded="false" />
-                <element signature="e#893#894#0" expanded="false" />
-                <element signature="e#1139#1140#0" expanded="false" />
-                <element signature="e#1213#1214#0" expanded="false" />
-                <element signature="e#1344#1345#0" expanded="false" />
-                <element signature="e#1399#1400#0" expanded="false" />
-                <element signature="e#1903#1904#0" expanded="false" />
-                <element signature="e#1934#1935#0" expanded="false" />
-                <element signature="e#2539#2540#0" expanded="false" />
-                <element signature="e#2586#2587#0" expanded="false" />
-                <element signature="e#2890#3016#0" expanded="false" />
-                <element signature="e#3015#3016#0" expanded="false" />
-                <element signature="e#3623#3801#0" expanded="false" />
-                <element signature="e#3800#3801#0" expanded="false" />
-                <element signature="e#4213#4391#0" expanded="false" />
-                <element signature="e#4390#4391#0" expanded="false" />
-                <element signature="e#5169#5364#0" expanded="false" />
-                <element signature="e#5363#5364#0" expanded="false" />
-                <element signature="e#5564#5565#0" expanded="false" />
-                <element signature="e#5628#5629#0" expanded="false" />
-                <element signature="e#6002#6184#0" expanded="false" />
-                <element signature="e#6183#6184#0" expanded="false" />
-                <element signature="e#6349#6350#0" expanded="false" />
-                <element signature="e#6438#6439#0" expanded="false" />
-                <element signature="e#6517#6518#0" expanded="false" />
-                <element signature="e#6572#6573#0" expanded="false" />
-                <element signature="e#6788#6789#0" expanded="false" />
-                <element signature="e#6857#6858#0" expanded="false" />
-                <element signature="e#7533#7534#0" expanded="false" />
-                <element signature="e#7579#7580#0" expanded="false" />
-                <element signature="e#7985#8121#0" expanded="false" />
-                <element signature="e#8120#8121#0" expanded="false" />
-                <element signature="e#8196#8344#0" expanded="false" />
-                <element signature="e#8343#8344#0" expanded="false" />
-                <element signature="e#8507#8643#0" expanded="false" />
-                <element signature="e#8642#8643#0" expanded="false" />
-                <element signature="e#8645#8793#0" expanded="false" />
-                <element signature="e#8792#8793#0" expanded="false" />
-                <element signature="e#9618#9793#0" expanded="false" />
-                <element signature="e#9792#9793#0" expanded="false" />
-                <element signature="e#9857#9858#0" expanded="false" />
-                <element signature="e#9917#9918#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DoubleStream.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/DoubleStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="55" column="5" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="55" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="false" />
-                <element signature="e#377#378#0" expanded="false" />
-                <element signature="e#412#413#0" expanded="false" />
-                <element signature="e#461#462#0" expanded="false" />
-                <element signature="e#542#543#0" expanded="false" />
-                <element signature="e#616#804#0" expanded="false" />
-                <element signature="e#803#804#0" expanded="false" />
-                <element signature="e#905#1117#0" expanded="false" />
-                <element signature="e#1116#1117#0" expanded="false" />
-                <element signature="e#1175#1343#0" expanded="false" />
-                <element signature="e#1342#1343#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IntStream.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/IntStream.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="72" column="23" lean-forward="false" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
-              <folding>
-                <element signature="e#232#262#0" expanded="false" />
-                <element signature="e#372#373#0" expanded="false" />
-                <element signature="e#404#405#0" expanded="false" />
-                <element signature="e#451#452#0" expanded="false" />
-                <element signature="e#533#534#0" expanded="false" />
-                <element signature="e#2128#2322#0" expanded="false" />
-                <element signature="e#2321#2322#0" expanded="false" />
-                <marker date="1512466388640" expanded="false" signature="47:230" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TestClass.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="578">
+              <caret line="42" column="49" lean-forward="false" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
               <folding>
-                <marker date="1512466388666" expanded="false" signature="7:354" ph="..." />
-                <marker date="1512466388666" expanded="true" signature="476:1572" ph="{...}" />
+                <marker date="1513936251181" expanded="false" signature="7:410" ph="..." />
+                <marker date="1513936251181" expanded="true" signature="532:1999" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PatternMatcher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/matcher/PatternMatcher.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Optional.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Optional.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="121" column="27" lean-forward="false" selection-start-line="121" selection-start-column="27" selection-end-line="121" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#325#326#0" expanded="false" />
+                <element signature="e#357#358#0" expanded="false" />
+                <element signature="e#405#406#0" expanded="false" />
+                <element signature="e#448#449#0" expanded="false" />
+                <element signature="e#493#494#0" expanded="false" />
+                <element signature="e#533#534#0" expanded="false" />
+                <element signature="e#567#568#0" expanded="false" />
+                <element signature="e#602#603#0" expanded="false" />
+                <element signature="e#624#625#0" expanded="false" />
+                <element signature="e#651#652#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PatternMatcherImp.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/PatternMatcherImp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+              <folding>
+                <element signature="e#1494#1724#0" expanded="false" />
+                <element signature="e#1723#1724#0" expanded="false" />
+                <marker date="1513936823924" expanded="true" signature="657:741" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -190,8 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/pipeline/Pipeline.java" />
-        <option value="$PROJECT_DIR$/src/main/java/interfaces/Stream.java" />
         <option value="$PROJECT_DIR$/src/main/java/interfaces/Optional.java" />
         <option value="$PROJECT_DIR$/src/main/java/classes/AbstractFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/base/Collector.java" />
@@ -229,7 +177,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/parallel/ParallelPredicate.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/parallel/ParallelObject.java" />
         <option value="$PROJECT_DIR$/profiles.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Optional.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/parallel/ParallelFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/ParallelStream.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/Function.java" />
@@ -240,6 +187,9 @@
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/DoubleStream.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/IntStream.java" />
         <option value="$PROJECT_DIR$/src/main/java/TestClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/PatternMatcherImp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/matcher/PatternMatcher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Optional.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
@@ -334,6 +284,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -348,9 +299,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -359,7 +309,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java" />
-    <property name="SearchEverywhereHistoryKey" value="Stre&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/Stream.java&#10;doubl&#9;PSI&#9;JAVA://com.utils.streamjava7.classes.DoubleStream&#10;Collec&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;Colle&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/CollectorImpl.java&#10;ints&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/IntStream.java&#10;Optional&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/Optional.java&#10;java.util.Stre&#9;PSI&#9;JAVA://java.util.stream.Stream&#10;java.util.FUnction&#9;PSI&#9;JAVA://java.util.function.Function&#10;test&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/TestClass.java&#10;collec&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/classes/Collectors.java&#10;HashMa&#9;PSI&#9;JAVA://java.util.HashMap&#10;Map&#9;PSI&#9;JAVA://java.util.Map&#10;Collectors&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;java.util.stream.Coll&#9;PSI&#9;JAVA://java.util.stream.Collectors&#10;java.util.Stream&#9;PSI&#9;JAVA://java.util.stream.Stream&#10;Collect&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;Collecto&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;List&#9;PSI&#9;JAVA://java.util.List&#10;Collections&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/Collections.java" />
+    <property name="SearchEverywhereHistoryKey" value="Optiona&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/Optional.java&#10;Stre&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/Stream.java&#10;doubl&#9;PSI&#9;JAVA://com.utils.streamjava7.classes.DoubleStream&#10;Collec&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;Colle&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/CollectorImpl.java&#10;ints&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/IntStream.java&#10;Optional&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/com/utils/streamjava7/classes/Optional.java&#10;java.util.Stre&#9;PSI&#9;JAVA://java.util.stream.Stream&#10;java.util.FUnction&#9;PSI&#9;JAVA://java.util.function.Function&#10;test&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/TestClass.java&#10;collec&#9;FILE&#9;file://C:/Users/simon.calabrese/Documents/streamjava7/src/main/java/classes/Collectors.java&#10;HashMa&#9;PSI&#9;JAVA://java.util.HashMap&#10;Map&#9;PSI&#9;JAVA://java.util.Map&#10;Collectors&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;java.util.stream.Coll&#9;PSI&#9;JAVA://java.util.stream.Collectors&#10;java.util.Stream&#9;PSI&#9;JAVA://java.util.stream.Stream&#10;Collect&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;Collecto&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/stream/Collectors.java&#10;List&#9;PSI&#9;JAVA://java.util.List&#10;Collections&#9;FILE&#9;jar://C:/Program Files/Java/jdk1.8.0_121/src.zip!/java/util/Collections.java" />
     <property name="settings.editor.selected.configurable" value="project.validation" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/src/main/java/TestClass.java" />
   </component>
@@ -870,7 +820,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511436268590</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="aggiunte funzionalità con double e integer">
+      <created>1512466826921</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1512466826921</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView">
@@ -896,20 +853,20 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32998884" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32887402" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3322185" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29904053" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3022388" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31326646" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31326646" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -965,7 +922,8 @@
     <MESSAGE value="fix reduce with binary operator e deploy sulla libreria fincons" />
     <MESSAGE value="add collectors to set and collection" />
     <MESSAGE value="prepare to new version" />
-    <option name="LAST_COMMIT_MESSAGE" value="prepare to new version" />
+    <MESSAGE value="aggiunte funzionalità con double e integer" />
+    <option name="LAST_COMMIT_MESSAGE" value="aggiunte funzionalità con double e integer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1022,215 +980,156 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#846#847#0" expanded="false" />
-            <element signature="e#893#894#0" expanded="false" />
-            <element signature="e#1139#1140#0" expanded="false" />
-            <element signature="e#1213#1214#0" expanded="false" />
-            <element signature="e#1344#1345#0" expanded="false" />
-            <element signature="e#1399#1400#0" expanded="false" />
-            <element signature="e#1903#1904#0" expanded="false" />
-            <element signature="e#1934#1935#0" expanded="false" />
-            <element signature="e#2539#2540#0" expanded="false" />
-            <element signature="e#2586#2587#0" expanded="false" />
-            <element signature="e#2890#3016#0" expanded="false" />
-            <element signature="e#3015#3016#0" expanded="false" />
-            <element signature="e#3623#3801#0" expanded="false" />
-            <element signature="e#3800#3801#0" expanded="false" />
-            <element signature="e#4213#4391#0" expanded="false" />
-            <element signature="e#4390#4391#0" expanded="false" />
-            <element signature="e#5169#5364#0" expanded="false" />
-            <element signature="e#5363#5364#0" expanded="false" />
-            <element signature="e#5564#5565#0" expanded="false" />
-            <element signature="e#5628#5629#0" expanded="false" />
-            <element signature="e#6002#6184#0" expanded="false" />
-            <element signature="e#6183#6184#0" expanded="false" />
-            <element signature="e#6349#6350#0" expanded="false" />
-            <element signature="e#6438#6439#0" expanded="false" />
-            <element signature="e#6517#6518#0" expanded="false" />
-            <element signature="e#6572#6573#0" expanded="false" />
-            <element signature="e#6788#6789#0" expanded="false" />
-            <element signature="e#6857#6858#0" expanded="false" />
-            <element signature="e#7533#7534#0" expanded="false" />
-            <element signature="e#7579#7580#0" expanded="false" />
-            <element signature="e#7985#8121#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="false" />
-            <element signature="e#8196#8344#0" expanded="false" />
-            <element signature="e#8343#8344#0" expanded="false" />
-            <element signature="e#8507#8643#0" expanded="false" />
-            <element signature="e#8642#8643#0" expanded="false" />
-            <element signature="e#8645#8793#0" expanded="false" />
-            <element signature="e#8792#8793#0" expanded="false" />
-            <element signature="e#9618#9793#0" expanded="false" />
-            <element signature="e#9792#9793#0" expanded="false" />
-            <element signature="e#9857#9858#0" expanded="false" />
-            <element signature="e#9917#9918#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1512466388666" expanded="false" signature="7:354" ph="..." />
-            <marker date="1512466388666" expanded="true" signature="476:1572" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#846#847#0" expanded="false" />
-            <element signature="e#893#894#0" expanded="false" />
-            <element signature="e#1139#1140#0" expanded="false" />
-            <element signature="e#1213#1214#0" expanded="false" />
-            <element signature="e#1344#1345#0" expanded="false" />
-            <element signature="e#1399#1400#0" expanded="false" />
-            <element signature="e#1903#1904#0" expanded="false" />
-            <element signature="e#1934#1935#0" expanded="false" />
-            <element signature="e#2539#2540#0" expanded="false" />
-            <element signature="e#2586#2587#0" expanded="false" />
-            <element signature="e#2890#3016#0" expanded="false" />
-            <element signature="e#3015#3016#0" expanded="false" />
-            <element signature="e#3623#3801#0" expanded="false" />
-            <element signature="e#3800#3801#0" expanded="false" />
-            <element signature="e#4213#4391#0" expanded="false" />
-            <element signature="e#4390#4391#0" expanded="false" />
-            <element signature="e#5169#5364#0" expanded="false" />
-            <element signature="e#5363#5364#0" expanded="false" />
-            <element signature="e#5564#5565#0" expanded="false" />
-            <element signature="e#5628#5629#0" expanded="false" />
-            <element signature="e#6002#6184#0" expanded="false" />
-            <element signature="e#6183#6184#0" expanded="false" />
-            <element signature="e#6349#6350#0" expanded="false" />
-            <element signature="e#6438#6439#0" expanded="false" />
-            <element signature="e#6517#6518#0" expanded="false" />
-            <element signature="e#6572#6573#0" expanded="false" />
-            <element signature="e#6788#6789#0" expanded="false" />
-            <element signature="e#6857#6858#0" expanded="false" />
-            <element signature="e#7533#7534#0" expanded="false" />
-            <element signature="e#7579#7580#0" expanded="false" />
-            <element signature="e#7985#8121#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="false" />
-            <element signature="e#8196#8344#0" expanded="false" />
-            <element signature="e#8343#8344#0" expanded="false" />
-            <element signature="e#8507#8643#0" expanded="false" />
-            <element signature="e#8642#8643#0" expanded="false" />
-            <element signature="e#8645#8793#0" expanded="false" />
-            <element signature="e#8792#8793#0" expanded="false" />
-            <element signature="e#9618#9793#0" expanded="false" />
-            <element signature="e#9792#9793#0" expanded="false" />
-            <element signature="e#9857#9858#0" expanded="false" />
-            <element signature="e#9917#9918#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
+        <state relative-caret-position="1343">
           <caret line="94" column="104" lean-forward="false" selection-start-line="94" selection-start-column="104" selection-end-line="94" selection-end-column="104" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#846#847#0" expanded="false" />
-            <element signature="e#893#894#0" expanded="false" />
-            <element signature="e#1139#1140#0" expanded="false" />
-            <element signature="e#1213#1214#0" expanded="false" />
-            <element signature="e#1344#1345#0" expanded="false" />
-            <element signature="e#1399#1400#0" expanded="false" />
-            <element signature="e#1903#1904#0" expanded="false" />
-            <element signature="e#1934#1935#0" expanded="false" />
-            <element signature="e#2539#2540#0" expanded="false" />
-            <element signature="e#2586#2587#0" expanded="false" />
-            <element signature="e#2890#3016#0" expanded="false" />
-            <element signature="e#3015#3016#0" expanded="false" />
-            <element signature="e#3623#3801#0" expanded="false" />
-            <element signature="e#3800#3801#0" expanded="false" />
-            <element signature="e#4213#4391#0" expanded="false" />
-            <element signature="e#4390#4391#0" expanded="false" />
-            <element signature="e#5169#5364#0" expanded="false" />
-            <element signature="e#5363#5364#0" expanded="false" />
-            <element signature="e#5564#5565#0" expanded="false" />
-            <element signature="e#5628#5629#0" expanded="false" />
-            <element signature="e#6002#6184#0" expanded="false" />
-            <element signature="e#6183#6184#0" expanded="false" />
-            <element signature="e#6349#6350#0" expanded="false" />
-            <element signature="e#6438#6439#0" expanded="false" />
-            <element signature="e#6517#6518#0" expanded="false" />
-            <element signature="e#6572#6573#0" expanded="false" />
-            <element signature="e#6788#6789#0" expanded="false" />
-            <element signature="e#6857#6858#0" expanded="false" />
-            <element signature="e#7533#7534#0" expanded="false" />
-            <element signature="e#7579#7580#0" expanded="false" />
-            <element signature="e#7985#8121#0" expanded="false" />
-            <element signature="e#8120#8121#0" expanded="false" />
-            <element signature="e#8196#8344#0" expanded="false" />
-            <element signature="e#8343#8344#0" expanded="false" />
-            <element signature="e#8507#8643#0" expanded="false" />
-            <element signature="e#8642#8643#0" expanded="false" />
-            <element signature="e#8645#8793#0" expanded="false" />
-            <element signature="e#8792#8793#0" expanded="false" />
-            <element signature="e#9618#9793#0" expanded="false" />
-            <element signature="e#9792#9793#0" expanded="false" />
-            <element signature="e#9857#9858#0" expanded="false" />
-            <element signature="e#9917#9918#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/DoubleStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
+        <state relative-caret-position="646">
           <caret line="55" column="5" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="55" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#377#378#0" expanded="false" />
-            <element signature="e#412#413#0" expanded="false" />
-            <element signature="e#461#462#0" expanded="false" />
-            <element signature="e#542#543#0" expanded="false" />
-            <element signature="e#616#804#0" expanded="false" />
-            <element signature="e#803#804#0" expanded="false" />
-            <element signature="e#905#1117#0" expanded="false" />
-            <element signature="e#1116#1117#0" expanded="false" />
-            <element signature="e#1175#1343#0" expanded="false" />
-            <element signature="e#1342#1343#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/IntStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
+        <state relative-caret-position="1020">
           <caret line="72" column="23" lean-forward="false" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
           <folding>
-            <element signature="e#232#262#0" expanded="false" />
-            <element signature="e#372#373#0" expanded="false" />
-            <element signature="e#404#405#0" expanded="false" />
-            <element signature="e#451#452#0" expanded="false" />
-            <element signature="e#533#534#0" expanded="false" />
-            <element signature="e#2128#2322#0" expanded="false" />
-            <element signature="e#2321#2322#0" expanded="false" />
-            <marker date="1512466388640" expanded="false" signature="47:230" ph="..." />
+            <marker date="1513936251181" expanded="false" signature="7:410" ph="..." />
+            <marker date="1513936251181" expanded="true" signature="532:1999" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="10" column="3" lean-forward="false" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1513936251181" expanded="false" signature="7:410" ph="..." />
+            <marker date="1513936251181" expanded="true" signature="532:1999" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Stream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="94" column="104" lean-forward="false" selection-start-line="94" selection-start-column="104" selection-end-line="94" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/DoubleStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="55" column="5" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="55" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/IntStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="72" column="23" lean-forward="false" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_80/src.zip!/java/lang/RuntimeException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="49" column="11" lean-forward="false" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+          <folding>
+            <element signature="e#1175#1176#0" expanded="true" />
+            <element signature="e#1198#1199#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/TestClass.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" column="30" lean-forward="false" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+        <state relative-caret-position="578">
+          <caret line="42" column="49" lean-forward="false" selection-start-line="42" selection-start-column="49" selection-end-line="42" selection-end-column="49" />
           <folding>
-            <marker date="1512466388666" expanded="false" signature="7:354" ph="..." />
-            <marker date="1512466388666" expanded="true" signature="476:1572" ph="{...}" />
+            <marker date="1513936251181" expanded="false" signature="7:410" ph="..." />
+            <marker date="1513936251181" expanded="true" signature="532:1999" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/interfaces/matcher/PatternMatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/PatternMatcherImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="35" column="10" lean-forward="false" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+          <folding>
+            <element signature="e#1494#1724#0" expanded="false" />
+            <element signature="e#1723#1724#0" expanded="false" />
+            <marker date="1513936823924" expanded="true" signature="657:741" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/utils/streamjava7/classes/Optional.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="121" column="27" lean-forward="false" selection-start-line="121" selection-start-column="27" selection-end-line="121" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#325#326#0" expanded="false" />
+            <element signature="e#357#358#0" expanded="false" />
+            <element signature="e#405#406#0" expanded="false" />
+            <element signature="e#448#449#0" expanded="false" />
+            <element signature="e#493#494#0" expanded="false" />
+            <element signature="e#533#534#0" expanded="false" />
+            <element signature="e#567#568#0" expanded="false" />
+            <element signature="e#602#603#0" expanded="false" />
+            <element signature="e#624#625#0" expanded="false" />
+            <element signature="e#651#652#0" expanded="false" />
           </folding>
         </state>
       </provider>

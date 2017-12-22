@@ -1,5 +1,6 @@
 import com.utils.streamjava7.classes.Collectors;
 import com.utils.streamjava7.classes.ParallelStream;
+import com.utils.streamjava7.classes.PatternMatcherImp;
 import com.utils.streamjava7.classes.Stream;
 import com.utils.streamjava7.interfaces.*;
 import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
@@ -21,25 +22,33 @@ public class TestClass {
                 new TestPair("c", 6),
                 new TestPair("c", 7)))).collect(Collectors.toCollection(new ArrayList<TestPair>()));
 
-        final Double sum = Stream.of(ts).mapToDouble(new ToDoubleFunction<TestPair>() {
+        Integer a = PatternMatcherImp.getMatcher(ts.get(0), new Function<TestPair, Integer>() {
             @Override
-            public Double apply(TestPair start) {
-                return new Double(start.getAge());
+            public Integer apply(TestPair start) {
+                return start.getAge();
             }
-        }).sum();
-
-        System.out.println(sum);
-        /*Stream.of(ts).forEachOrdered(new Consumer<TestPair>() {
+        }).addMather(new Predicate<TestPair>() {
             @Override
-            public void consume(TestPair elem) {
-                System.out.println(elem.getName());
+            public Boolean test(TestPair object) {
+                return object.getName().equals("a") && object.getAge() % 2 == 0;
             }
-        }, new Comparator<TestPair>() {
+        }, new Function<TestPair, Integer>() {
             @Override
-            public int compare(TestPair o1, TestPair o2) {
-                return o1.getName().compareTo(o2.getName());
+            public Integer apply(TestPair start) {
+                return start.getAge() * 2;
             }
-        });*/
+        }).addMather(new Predicate<TestPair>() {
+            @Override
+            public Boolean test(TestPair object) {
+                return object.getName().equals("a") && object.getAge() % 2 == 1;
+            }
+        }, new Function<TestPair, Integer>() {
+            @Override
+            public Integer apply(TestPair start) {
+                return start.getAge() * 3;
+            }
+        }).match();
+        System.out.println(a);
     }
 
 

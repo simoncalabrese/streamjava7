@@ -118,10 +118,14 @@ public class Optional<T> {
     }
 
     public <U> Optional<U> mapByPattarn(final Predicate<T> pattern, final Function<T, U> caseTrue, final Function<T, U> caseFalse) {
-        if(isPresent()){
+        return new Optional<>(PatternMatcherImp.getMatcher(elem, caseFalse)
+                .addMatcher(pattern, caseTrue)
+                .match());
+
+        /*if(isPresent()){
             return Optional.of(pattern.test(this.get()) ? caseTrue.apply(this.get()) : caseFalse.apply(this.get()));
         } else {
             return Optional.empty();
-        }
+        }*/
     }
 }
