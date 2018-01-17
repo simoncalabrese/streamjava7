@@ -1,7 +1,4 @@
-import com.utils.streamjava7.classes.Collectors;
-import com.utils.streamjava7.classes.ParallelStream;
-import com.utils.streamjava7.classes.PatternMatcherImp;
-import com.utils.streamjava7.classes.Stream;
+import com.utils.streamjava7.classes.*;
 import com.utils.streamjava7.interfaces.*;
 import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
@@ -22,12 +19,31 @@ public class TestClass {
                 new TestPair("c", 6),
                 new TestPair("c", 7)))).collect(Collectors.toCollection(new ArrayList<TestPair>()));
 
+        Integer b = Optional.of(ts.get(0)).mapByPattarn(new Predicate<TestPair>() {
+            @Override
+            public Boolean test(TestPair object) {
+                return object.getName().equals("b") && object.getAge() % 2 == 0;
+            }
+        },new Function<TestPair, Integer>() {
+            @Override
+            public Integer apply(TestPair start) {
+                return start.getAge() * 2;
+            }
+        },new Function<TestPair, Integer>() {
+            @Override
+            public Integer apply(TestPair start) {
+                return start.getAge() * 3;
+            }
+        }).orElse(null);
+        System.out.println(b);
+
+
         Integer a = PatternMatcherImp.getMatcher(ts.get(0), new Function<TestPair, Integer>() {
             @Override
             public Integer apply(TestPair start) {
                 return start.getAge();
             }
-        }).addMather(new Predicate<TestPair>() {
+        }).addMatcher(new Predicate<TestPair>() {
             @Override
             public Boolean test(TestPair object) {
                 return object.getName().equals("a") && object.getAge() % 2 == 0;
@@ -37,7 +53,7 @@ public class TestClass {
             public Integer apply(TestPair start) {
                 return start.getAge() * 2;
             }
-        }).addMather(new Predicate<TestPair>() {
+        }).addMatcher(new Predicate<TestPair>() {
             @Override
             public Boolean test(TestPair object) {
                 return object.getName().equals("a") && object.getAge() % 2 == 1;
