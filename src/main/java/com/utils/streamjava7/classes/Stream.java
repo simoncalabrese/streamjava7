@@ -1,9 +1,11 @@
 package com.utils.streamjava7.classes;
 
+import com.utils.streamjava7.collection.Pipeline;
+import com.utils.streamjava7.collection.PipelineImpl;
 import com.utils.streamjava7.interfaces.*;
 import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 import com.utils.streamjava7.interfaces.innerFunction.ToIntegerFunction;
-import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -16,7 +18,11 @@ public class Stream<T> extends BaseStream<T> {
     }
 
     protected Stream(final Collection<T> coll) {
-        super.pipeline = new Pipeline<>(Optional.of(coll).orElse(new ArrayList<T>()));
+        super.pipeline = new PipelineImpl<>(Optional.of(coll).orElse(new ArrayList<T>()));
+    }
+
+    protected Stream(final Pipeline<T> pipeline) {
+        super.pipeline = pipeline;
     }
 
     /**
@@ -60,9 +66,8 @@ public class Stream<T> extends BaseStream<T> {
      * @return stream results by merge of two streams
      */
     public static <T> Stream<T> concat(final Stream<T> streamA, final Stream<T> streamB) {
-        final Collection<T> newColl = streamA.getPipeline().getColl();
-        newColl.addAll(streamB.getPipeline().getColl());
-        return new Stream<T>(newColl);
+        return new Stream<>(streamA.getPipeline().merge(streamB.getPipeline()));
+
     }
 
     private Pipeline<T> getPipeline() {
@@ -77,11 +82,11 @@ public class Stream<T> extends BaseStream<T> {
      * @return
      */
     public <U> Stream<U> map(final Function<T, U> mapper) {
-        final Collection<U> newInstance = getPipeline().getNewInstance();
-        for (T elem : getPipeline().getColl()) {
-            newInstance.add(mapper.apply(elem));
+        final Pipeline<U> newSeq = new PipelineImpl<>(this.count());
+        for (T t : this.getPipeline()) {
+            newSeq.add(mapper.apply(t));
         }
-        return new Stream<>(newInstance);
+        return new Stream<>(newSeq);
     }
 
     /**
@@ -92,7 +97,9 @@ public class Stream<T> extends BaseStream<T> {
         return new IntStream(map(func));
     }
 
-    public DoubleStream mapToDouble(final ToDoubleFunction<T> func) {return new DoubleStream(map(func));}
+    public DoubleStream mapToDouble(final ToDoubleFunction<T> func) {
+        return new DoubleStream(map(func));
+    }
 
     /**
      * perform reducing that returns the last element of a collection
@@ -115,17 +122,15 @@ public class Stream<T> extends BaseStream<T> {
      * @return Optional of element in collection
      */
     public Optional<T> reduce(final BinaryOperator<T> operator) {
-        if (CollectionUtils.isEmpty(this.getPipeline().getColl())) {
+        if (!this.getPipeline().isNotEmpty()) {
             return Optional.empty();
         }
-        final List<T> ts = getPipeline().toList();
-        Optional<T> op = Optional.of(ts.get(0));
-        ts.remove(0);
-        for (final T elem : ts) {
+        Optional<T> op = Optional.of(this.getPipeline().head());
+        for (final T t : this.getPipeline().tail()) {
             op = op.map(new Function<T, T>() {
                 @Override
                 public T apply(T start) {
-                    return operator.apply(start, elem);
+                    return operator.apply(start, t);
                 }
             });
         }
@@ -141,7 +146,7 @@ public class Stream<T> extends BaseStream<T> {
      */
     public <U> U reduce(final U identity, final BiFunction<U, T, U> biMapper) {
         Optional<U> op = Optional.of(identity);
-        for (final T elem : getPipeline().getColl()) {
+        for (final T elem : getPipeline()) {
             op = op.map(new Function<U, U>() {
                 @Override
                 public U apply(U start) {
@@ -159,13 +164,14 @@ public class Stream<T> extends BaseStream<T> {
      * @return
      */
     public Stream<T> filter(final Predicate<T> pattern) {
-        final Collection<T> newInstance = getPipeline().getNewInstance();
-        for (final T elem : getPipeline().getColl()) {
-            if (pattern.test(elem)) {
-                newInstance.add(elem);
+        final Pipeline<T> pipelineImp = new PipelineImpl<>(this.count());
+        for (T t : this.pipeline) {
+            if (pattern.test(t)) {
+                pipelineImp.add(t);
             }
         }
-        return new Stream<>(newInstance);
+        this.pipeline = pipelineImp;
+        return this;
     }
 
     /**
@@ -188,16 +194,16 @@ public class Stream<T> extends BaseStream<T> {
      * @return
      */
     public Stream<T> peek(final UnaryOperator<T> consumer) {
-        return of(getPipeline().getColl()).map(consumer);
+        return new Stream<>(getPipeline()).map(consumer);
     }
 
     public void forEach(final Consumer<T> consumer) {
-        for (T t : getPipeline().getColl()) {
+        for (T t : getPipeline()) {
             consumer.consume(t);
         }
     }
 
-    public void forEachOrdered(final Consumer<T> consumer,final Comparator<T> comparator) {
+    public void forEachOrdered(final Consumer<T> consumer, final Comparator<T> comparator) {
         sorted(comparator).forEach(consumer);
     }
 
@@ -214,14 +220,14 @@ public class Stream<T> extends BaseStream<T> {
      * @return the first element of stream as an optional or empty if Stream is empty
      */
     public Optional<T> findFirst() {
-        return Optional.of(collect(Collectors.toList(new ArrayList<T>())).get(0));
+        return Optional.of(pipeline.head());
     }
 
     /**
      * @return the elements in list
      */
     public Long count() {
-        return (long) pipeline.getColl().size();
+        return (long) pipeline.pipeline().length;
     }
 
     /**
@@ -241,7 +247,7 @@ public class Stream<T> extends BaseStream<T> {
      * @return
      */
     public Boolean allMatch(final Predicate<T> pattern) {
-        return Long.compare(of(pipeline.getColl()).count(), of(pipeline.getColl()).filter(pattern).count()) == 0;
+        return Long.compare(new Stream<>(pipeline).count(), new Stream<>(pipeline).filter(pattern).count()) == 0;
     }
 
     /**
@@ -299,20 +305,65 @@ public class Stream<T> extends BaseStream<T> {
     }
 
     public Stream<T> skip(final int numToSkip) {
-        final List<T> ts = getPipeline().toList();
-        final ArrayList<T> newColl = new ArrayList<>();
-        for (int i = numToSkip; i < getPipeline().getColl().size(); i++) {
-            newColl.add(ts.get(i));
+        for (int i = 0; i < numToSkip; i++) {
+            pipeline = pipeline.tail();
         }
-        return Stream.of(newColl);
+        return this;
+    }
+
+    /**
+     * @param tails boot streams
+     * @param acc   result accumulator
+     * @param join  -1 left join, 0 inner join, 1 right join
+     * @param <U>
+     * @return
+     */
+    private <U> PairStream<T, U> recZip(final Pair<Pipeline<T>, Pipeline<U>> tails, PairStream<T, U> acc, final Integer join) {
+        acc.pipeline.add(Pair.of(tails.getLeft().head(), tails.getRight().head()));
+        final Pipeline<T> tail = tails.getKey().tail();
+        final Pipeline<U> tail1 = tails.getValue().tail();
+        final Boolean condition;
+        switch (join) {
+            case -1:
+                condition = tail.isNotEmpty();
+                break;
+            case 0:
+                condition = tail.isNotEmpty() && tail1.isNotEmpty();
+                break;
+            case 1:
+                condition = tail1.isNotEmpty();
+                break;
+            default:
+                condition = Boolean.FALSE;
+                break;
+        }
+        if (condition) {
+            recZip(Pair.of(tail, tail1), acc, join);
+        }
+        return acc;
+    }
+
+    public <U> PairStream<T, U> zip(final Collection<U> coll) {
+        return recZip(Pair.of(this.pipeline, Stream.of(coll).pipeline),
+                new PairStream<>(new PipelineImpl<Pair<T, U>>(this.count())), 0);
+    }
+
+    public <U> PairStream<T, U> zipLeft(final Collection<U> coll) {
+        return recZip(Pair.of(this.pipeline, Stream.of(coll).pipeline),
+                new PairStream<>(new PipelineImpl<Pair<T, U>>(this.count())), -1);
+    }
+
+    public <U> PairStream<T, U> zipRight(final Collection<U> coll) {
+        return recZip(Pair.of(this.pipeline, Stream.of(coll).pipeline),
+                new PairStream<>(new PipelineImpl<Pair<T, U>>(this.count())), 1);
     }
 
     public Stream<Stream<T>> split(final Integer chunkSize) {
         List<List<T>> partitions = new ArrayList<>();
-        final int chunkList = pipeline.getColl().size() % chunkSize;
-        for (int i = 0; i < pipeline.getColl().size(); i += chunkList) {
+        final int chunkList = pipeline.toList().size() % chunkSize;
+        for (int i = 0; i < pipeline.toList().size(); i += chunkList) {
             partitions.add(new ArrayList<>(collect(Collectors.toList(new ArrayList<T>())).subList(i,
-                    Math.min(i + chunkList, pipeline.getColl().size()))));
+                    Math.min(i + chunkList, pipeline.toList().size()))));
         }
         return Stream.of(partitions).map(new Function<List<T>, Stream<T>>() {
             @Override
@@ -324,6 +375,90 @@ public class Stream<T> extends BaseStream<T> {
 
     @Override
     public ParallelStream<T> parallel() {
-        return ParallelStream.of(pipeline.getColl());
+        return new ParallelStream<>(pipeline);
+    }
+
+    @Override
+    public Pair<List<T>, List<T>> partition(final Predicate<T> pattern) {
+        return reduce(Pair.of((List<T>) new ArrayList<T>(), (List<T>) new ArrayList<T>()), new BiFunction<Pair<List<T>, List<T>>, T, Pair<List<T>, List<T>>>() {
+            @Override
+            public Pair<List<T>, List<T>> apply(Pair<List<T>, List<T>> elem1, T elem2) {
+                if (pattern.test(elem2)) {
+                    elem1.getKey().add(elem2);
+                } else {
+                    elem1.getValue().add(elem2);
+                }
+                return elem1;
+            }
+        });
+    }
+
+    @Override
+    public Stream<T> takeWhile(final Predicate<T> pattern) {
+        final Pipeline<T> newSeq = new PipelineImpl<>(this.count());
+        //recursive function
+        final BiFunction<Pipeline<T>, Pipeline<T>, Pipeline<T>> func = new BiFunction<Pipeline<T>, Pipeline<T>, Pipeline<T>>() {
+            @Override
+            public Pipeline<T> apply(Pipeline<T> actual, Pipeline<T> future) {
+                if (pattern.test(actual.head())) {
+                    return future;
+                } else {
+                    future.add(actual.head());
+                    return apply(actual.tail(), future);
+                }
+            }
+        };
+        return new Stream<>(func.apply(this.pipeline, newSeq));
+
+    }
+
+    @Override
+    public Stream<T> dropWhile(final Predicate<T> pattern) {
+        final Pipeline<T> newSeq = new PipelineImpl<>(this.count());
+        final BiFunction<Pipeline<T>, Pipeline<T>, Pipeline<T>> func = new BiFunction<Pipeline<T>, Pipeline<T>, Pipeline<T>>() {
+            @Override
+            public Pipeline<T> apply(Pipeline<T> actual, Pipeline<T> future) {
+                if (pattern.test(actual.head())) {
+                    future.addAll(actual);
+                    return future;
+                } else {
+                    return apply(actual.tail(), future);
+                }
+            }
+        };
+        return new Stream<>(func.apply(this.pipeline, newSeq));
+    }
+
+    @Override
+    public Pair<List<T>, List<T>> span(final Predicate<T> pattern) {
+        final List<T> left = takeWhile(pattern).collect(Collectors.toList(new ArrayList<T>()));
+        final List<T> right = dropWhile(pattern).collect(Collectors.toList(new ArrayList<T>()));
+        return Pair.of(left, right);
+    }
+
+
+    private Pipeline<T> recursivePack(Pipeline<T> group, T lastElem) {
+        final T head = this.pipeline.head();
+        if (lastElem.equals(head)) {
+            group.add(head);
+            this.pipeline = pipeline.tail();
+            return recursivePack(group, head);
+        } else {
+            return group;
+        }
+    }
+
+    @Override
+    public Stream<Stream<T>> pack() {
+        final Pipeline<Pipeline<T>> pipeline = new PipelineImpl<>(count());
+        while (this.pipeline.tail().isNotEmpty()) {
+            pipeline.add(recursivePack(new PipelineImpl<T>(count()), this.pipeline.head()));
+        }
+        return new Stream<>(pipeline).map(new Function<Pipeline<T>, Stream<T>>() {
+            @Override
+            public Stream<T> apply(Pipeline<T> start) {
+                return new Stream<>(start);
+            }
+        });
     }
 }

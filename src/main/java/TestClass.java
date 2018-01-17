@@ -1,70 +1,60 @@
-import com.utils.streamjava7.classes.*;
-import com.utils.streamjava7.interfaces.*;
-import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
-import com.utils.streamjava7.interfaces.innerFunction.ToStringFunction;
+import com.utils.streamjava7.classes.Collectors;
+import com.utils.streamjava7.classes.Stream;
+import com.utils.streamjava7.interfaces.Consumer;
+import com.utils.streamjava7.interfaces.Predicate;
+import com.utils.streamjava7.interfaces.innerFunction.ToPairFunction;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by simon.calabrese on 26/06/2017.
  */
 public class TestClass {
     public static void main(String[] rgs) {
-        List<TestPair> ts = Stream.of(new ArrayList<>(Arrays.asList(
-                new TestPair("b", 1),
-                new TestPair("b", 2),
-                new TestPair("a", 3),
-                new TestPair("a", 4),
-                new TestPair("c", 5),
-                new TestPair("c", 6),
-                new TestPair("c", 7)))).collect(Collectors.toCollection(new ArrayList<TestPair>()));
+        List<Integer> li = Arrays.asList(1, 2,2,3,3,3,1,1);
+        final Pair<List<Integer>, List<Integer>> partition = Stream.of(li).partition(new Predicate<Integer>() {
+            @Override
+            public Boolean test(Integer object) {
+                return object % 2 == 0;
+            }
+        });
+        final ArrayList<Integer> collect = Stream.of(li).dropWhile(new Predicate<Integer>() {
+            @Override
+            public Boolean test(Integer object) {
+                return object % 2 == 1;
+            }
+        }).collect(Collectors.toList(new ArrayList<Integer>()));
 
-        Integer b = Optional.of(ts.get(0)).mapByPattarn(new Predicate<TestPair>() {
+        final Pair<List<Integer>, List<Integer>> span = Stream.of(li).span(new Predicate<Integer>() {
             @Override
-            public Boolean test(TestPair object) {
-                return object.getName().equals("b") && object.getAge() % 2 == 0;
+            public Boolean test(Integer object) {
+                return object % 2 == 0;
             }
-        },new Function<TestPair, Integer>() {
+        });
+        Stream.of(li).pack().forEach(new Consumer<Stream<Integer>>() {
             @Override
-            public Integer apply(TestPair start) {
-                return start.getAge() * 2;
-            }
-        },new Function<TestPair, Integer>() {
-            @Override
-            public Integer apply(TestPair start) {
-                return start.getAge() * 3;
-            }
-        }).orElse(null);
-        System.out.println(b);
+            public void consume(Stream<Integer> elem) {
+                System.out.println("\n\n");
+                elem.forEach(new Consumer<Integer>() {
+                    @Override
+                    public void consume(Integer elem) {
+                        System.out.println(elem);
+                    }
+                });
 
+            }
+        });
+        System.out.println(partition);
 
-        Integer a = PatternMatcherImp.getMatcher(ts.get(0), new Function<TestPair, Integer>() {
+        Stream.of(li).map(new ToPairFunction<Integer,Integer,Integer>() {
             @Override
-            public Integer apply(TestPair start) {
-                return start.getAge();
+            public Pair<Integer, Integer> apply(Integer start) {
+                return Pair.of(start,start*2);
             }
-        }).addMatcher(new Predicate<TestPair>() {
-            @Override
-            public Boolean test(TestPair object) {
-                return object.getName().equals("a") && object.getAge() % 2 == 0;
-            }
-        }, new Function<TestPair, Integer>() {
-            @Override
-            public Integer apply(TestPair start) {
-                return start.getAge() * 2;
-            }
-        }).addMatcher(new Predicate<TestPair>() {
-            @Override
-            public Boolean test(TestPair object) {
-                return object.getName().equals("a") && object.getAge() % 2 == 1;
-            }
-        }, new Function<TestPair, Integer>() {
-            @Override
-            public Integer apply(TestPair start) {
-                return start.getAge() * 3;
-            }
-        }).match();
-        System.out.println(a);
+        }).collect(Collectors.toList(new ArrayList<Pair<Integer,Integer>>()));
     }
 
 

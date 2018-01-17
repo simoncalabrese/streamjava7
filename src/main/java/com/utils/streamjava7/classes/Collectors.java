@@ -21,13 +21,6 @@ public class Collectors {
      */
     public static <U extends List<T>, T> Collector<U, T, U> toList(final U identity) {
         return toCollection(identity);
-        /*return reducing(identity, new BiFunction<U, T, U>() {
-            @Override
-            public U apply(U elem1, T elem2) {
-                elem1.add(elem2);
-                return elem1;
-            }
-        });*/
     }
 
     public static <U extends Set<T>, T> Collector<U, T, U> toSet(final U identity) {
