@@ -89,6 +89,11 @@ public class PipelineImpl<T> implements Pipeline<T> {
     }
 
     @Override
+    public void replace(Pipeline<T> pipeline) {
+        this.pipeline = pipeline.pipeline();
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return new SequenceIterator(this);
     }

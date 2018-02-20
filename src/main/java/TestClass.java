@@ -1,11 +1,10 @@
 import com.utils.streamjava7.classes.Collectors;
-import com.utils.streamjava7.classes.Stream;
 import com.utils.streamjava7.interfaces.Consumer;
-import com.utils.streamjava7.interfaces.Predicate;
-import com.utils.streamjava7.interfaces.innerFunction.ToPairFunction;
-import org.apache.commons.lang3.tuple.Pair;
+import com.utils.streamjava7.interfaces.Function;
+import com.utils.streamjava7.classes.streamableCollections.classes.StreamableSequence;
+import com.utils.streamjava7.classes.streamableCollections.interfaces.StreamableList;
+import com.utils.streamjava7.interfaces.innerFunction.ToDoubleFunction;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,47 +13,21 @@ import java.util.List;
  */
 public class TestClass {
     public static void main(String[] rgs) {
-        List<Integer> li = Arrays.asList(1, 2,2,3,3,3,1,1);
-        final Pair<List<Integer>, List<Integer>> partition = Stream.of(li).partition(new Predicate<Integer>() {
+        StreamableList<Integer> ll = new StreamableSequence<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
+        final Double collect = ll.map(new Function<Integer, Integer>() {
             @Override
-            public Boolean test(Integer object) {
-                return object % 2 == 0;
+            public Integer apply(Integer start) {
+                return start;
             }
-        });
-        final ArrayList<Integer> collect = Stream.of(li).dropWhile(new Predicate<Integer>() {
+        }).collect(Collectors.summingDouble(new ToDoubleFunction<Integer>() {
             @Override
-            public Boolean test(Integer object) {
-                return object % 2 == 1;
+            public Double apply(Integer start) {
+                System.out.println(start + " + ");
+                return new Double(start);
             }
-        }).collect(Collectors.toList(new ArrayList<Integer>()));
+        }));
+        System.out.println(collect);
 
-        final Pair<List<Integer>, List<Integer>> span = Stream.of(li).span(new Predicate<Integer>() {
-            @Override
-            public Boolean test(Integer object) {
-                return object % 2 == 0;
-            }
-        });
-        Stream.of(li).pack().forEach(new Consumer<Stream<Integer>>() {
-            @Override
-            public void consume(Stream<Integer> elem) {
-                System.out.println("\n\n");
-                elem.forEach(new Consumer<Integer>() {
-                    @Override
-                    public void consume(Integer elem) {
-                        System.out.println(elem);
-                    }
-                });
-
-            }
-        });
-        System.out.println(partition);
-
-        Stream.of(li).map(new ToPairFunction<Integer,Integer,Integer>() {
-            @Override
-            public Pair<Integer, Integer> apply(Integer start) {
-                return Pair.of(start,start*2);
-            }
-        }).collect(Collectors.toList(new ArrayList<Pair<Integer,Integer>>()));
     }
 
 

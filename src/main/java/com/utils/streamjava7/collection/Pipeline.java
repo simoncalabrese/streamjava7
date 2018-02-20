@@ -22,4 +22,6 @@ public interface Pipeline<T> extends Iterable<T> {
 
     @Override
     Iterator<T> iterator();
+
+    void replace(final Pipeline<T> pipeline);
 }

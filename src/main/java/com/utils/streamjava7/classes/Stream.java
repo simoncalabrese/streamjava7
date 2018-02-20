@@ -25,6 +25,10 @@ public class Stream<T> extends BaseStream<T> {
         super.pipeline = pipeline;
     }
 
+    void replacePipeline(Collection<T> s) {
+        this.pipeline = new PipelineImpl<>(s);
+    }
+
     /**
      * Create a stream starting by a collection
      *
@@ -70,7 +74,7 @@ public class Stream<T> extends BaseStream<T> {
 
     }
 
-    private Pipeline<T> getPipeline() {
+    Pipeline<T> getPipeline() {
         return pipeline;
     }
 
