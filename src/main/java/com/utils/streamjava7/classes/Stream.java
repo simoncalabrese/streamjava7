@@ -251,7 +251,12 @@ public class Stream<T> extends BaseStream<T> {
      * @return
      */
     public Boolean allMatch(final Predicate<T> pattern) {
-        return Long.compare(new Stream<>(pipeline).count(), new Stream<>(pipeline).filter(pattern).count()) == 0;
+        for (T t : this.pipeline) {
+            if (!pattern.test(t)) {
+                return Boolean.FALSE;
+            }
+        }
+        return Boolean.TRUE;
     }
 
     /**
